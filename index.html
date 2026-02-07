@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Piash Jodder | Premium Portfolio</title>
+  <title>Piash Jodder | Full-Stack Developer</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -21,9 +21,8 @@
             muted: "hsl(263, 20%, 10%)",
             primary: {
               DEFAULT: "hsl(263, 70%, 50%)",
-              foreground: "hsl(210, 20%, 98%)",
+              foreground: "#ffffff",
             },
-            accent: "hsl(263, 50%, 40%)",
             card: "hsl(263, 40%, 4%)",
           },
         }
@@ -34,23 +33,24 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    :root {
-      --primary-glow: radial-gradient(rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0));
-    }
-
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: hsl(263, 40%, 2%);
       color: hsl(210, 20%, 98%);
-      overflow-x: hidden; /* Fixes the side scrollbar issue */
+      overflow-x: hidden;
       width: 100%;
     }
 
-    /* Shadcn-like subtle glassmorphism */
     .glass-card {
       background: rgba(15, 10, 25, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid hsl(263, 30%, 15%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      border-color: hsl(263, 70%, 50%);
+      transform: translateY(-5px);
     }
 
     .gradient-text {
@@ -60,32 +60,20 @@
       color: transparent;
     }
 
-    .shimmer-btn {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .shimmer-btn::after {
+    .step-line::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: rotate(45deg);
-      transition: 0.5s;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, hsl(263, 70%, 50%), transparent);
     }
 
-    .shimmer-btn:hover::after {
-      left: 120%;
-    }
-
-    /* Custom scrollbar for a pro look */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: hsl(263, 40%, 2%); }
-    ::-webkit-scrollbar-thumb { background: hsl(263, 30%, 15%); border-radius: 10px; }
+    /* Scrollbar hide for clean UI */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: hsl(263, 30%, 20%); border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: hsl(263, 70%, 50%); }
   </style>
 </head>
@@ -95,196 +83,217 @@
 <nav class="fixed top-0 w-full z-50 border-b border-border/50 bg-background/60 backdrop-blur-xl">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <div class="text-xl font-bold tracking-tighter flex items-center gap-2">
-      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">P</div>
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">P</div>
       <span>PIASH<span class="text-primary">.</span></span>
     </div>
-    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/60">
+    <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-foreground/60">
       <a href="#about" class="hover:text-primary transition-colors">About</a>
-      <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
-      <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
-      <a href="#contact" class="px-4 py-2 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-all">Get in Touch</a>
+      <a href="#portfolio" class="hover:text-primary transition-colors">Portfolio</a>
+      <a href="#process" class="hover:text-primary transition-colors">Process</a>
+      <a href="#fiverr" class="hover:text-primary transition-colors">Hire Me</a>
+      <a href="#reviews" class="hover:text-primary transition-colors">Reviews</a>
+      <a href="#contact" class="px-5 py-2.5 bg-primary text-white rounded-full hover:scale-105 transition-all shadow-lg shadow-primary/20">Let's Talk</a>
     </div>
   </div>
 </nav>
 
-<section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full"></div>
-  
-  <div class="relative z-10 max-w-4xl text-center space-y-8" data-aos="zoom-out">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-      </span>
-      Open for New Projects
-    </div>
-    
-    <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight leading-[1.1]">
-      Building the <span class="gradient-text">Future</span> of the Web
-    </h1>
-    
-    <p class="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">
-      Freelance Full-stack Developer specializing in high-performance digital products and immersive UI experiences.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <a href="#contact" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/20">
-        Start a Project
-      </a>
-      <a href="#projects" class="w-full sm:w-auto px-8 py-4 glass-card rounded-2xl font-bold hover:bg-white/5 transition-colors">
-        View Gallery
-      </a>
+<section class="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full"></div>
+  <div class="relative z-10 max-w-4xl text-center space-y-6" data-aos="fade-up">
+    <span class="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-xs font-bold text-primary tracking-widest uppercase">Expert Web Solutions</span>
+    <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight">Crafting Digital <br><span class="gradient-text">Masterpieces</span></h1>
+    <p class="text-lg text-foreground/60 max-w-2xl mx-auto">Helping brands scale with high-end web applications, interactive UI, and pixel-perfect performance.</p>
+    <div class="flex flex-wrap justify-center gap-4 pt-4">
+      <a href="#portfolio" class="px-8 py-4 bg-primary text-white rounded-2xl font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all">View My Work</a>
+      <a href="#fiverr" class="px-8 py-4 glass-card rounded-2xl font-bold">Order on Fiverr</a>
     </div>
   </div>
 </section>
 
 <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
-  <div class="mb-16">
-    <h2 class="text-3xl font-bold mb-4">Core Philosophy</h2>
-    <div class="h-1 w-20 bg-primary rounded-full"></div>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="md:col-span-2 glass-card p-8 rounded-3xl space-y-4" data-aos="fade-right">
-      <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
-        <i data-lucide="code-2" class="text-primary"></i>
-      </div>
-      <h3 class="text-2xl font-bold">The Technical Edge</h3>
-      <p class="text-foreground/60 leading-relaxed">
-        I don't just "build websites." I engineer scalable infrastructures using React, Tailwind, and high-performance backend systems. Every project is optimized for <span class="text-white font-semibold">Core Web Vitals</span> and search engine visibility.
-      </p>
-    </div>
-
-    <div class="glass-card p-8 rounded-3xl text-center flex flex-col justify-center items-center" data-aos="fade-left">
-      <div class="text-5xl font-black text-primary mb-2">5+</div>
-      <p class="text-sm uppercase tracking-widest font-bold">Years Experience</p>
-    </div>
-
-    <div class="glass-card p-8 rounded-3xl" data-aos="fade-up">
-      <h4 class="font-bold mb-6 flex items-center gap-2">
-        <i data-lucide="layers" class="w-4 h-4"></i> Stack
-      </h4>
-      <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">Next.js</span>
-        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">TypeScript</span>
-        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">PostgreSQL</span>
-        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">Tailwind</span>
+  <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <div data-aos="fade-right">
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="Piash" class="relative rounded-3xl grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover aspect-[4/5]">
       </div>
     </div>
-
-    <div class="md:col-span-2 glass-card p-8 rounded-3xl flex items-center justify-between" data-aos="fade-up" data-aos-delay="100">
-      <div>
-        <h3 class="text-xl font-bold">Global Delivery</h3>
-        <p class="text-foreground/60">Delivering quality to clients worldwide.</p>
-      </div>
-      <div class="flex -space-x-3">
-        <div class="w-10 h-10 rounded-full border-2 border-card bg-zinc-800"></div>
-        <div class="w-10 h-10 rounded-full border-2 border-card bg-zinc-700"></div>
-        <div class="w-10 h-10 rounded-full border-2 border-card bg-primary flex items-center justify-center text-[10px] font-bold">+50</div>
+    <div class="space-y-8" data-aos="fade-left">
+      <h2 class="text-4xl font-bold">I'm Piash, a passionate <span class="text-primary">Full-Stack Developer</span></h2>
+      <p class="text-foreground/60 text-lg leading-relaxed">With over 5 years of experience, I specialize in building modern web applications that are fast, secure, and visually stunning. My goal is to turn your complex ideas into simple, elegant digital solutions.</p>
+      
+      <div class="grid grid-cols-2 gap-6">
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-3xl font-bold text-primary">50+</div>
+          <div class="text-sm text-foreground/40">Projects Completed</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-3xl font-bold text-primary">24/7</div>
+          <div class="text-sm text-foreground/40">Online Support</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects" class="py-24 px-6 bg-primary/[0.02]">
+<section id="portfolio" class="py-24 px-6 bg-primary/[0.02]">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16 space-y-4">
-      <h2 class="text-4xl font-bold">Selected Works</h2>
-      <p class="text-foreground/60">Where logic meets creativity.</p>
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+      <div data-aos="fade-up">
+        <h2 class="text-4xl font-bold mb-4">Latest Projects</h2>
+        <p class="text-foreground/60">A glimpse into my recent digital creations.</p>
+      </div>
+      <button class="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all">View All <i data-lucide="arrow-right"></i></button>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="group relative overflow-hidden rounded-3xl border border-border" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110" />
-        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent p-8 flex flex-col justify-end">
-          <h3 class="text-2xl font-bold">Fintech Dashboard</h3>
-          <p class="text-foreground/60 mb-4">Enterprise level analytics</p>
-          <div class="flex gap-4">
-            <i data-lucide="external-link" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
-            <i data-lucide="github" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="group glass-card rounded-3xl overflow-hidden" data-aos="fade-up">
+        <div class="aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-xl font-bold">E-Commerce OS</h3>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-sm text-foreground/50 mb-4">A high-performance online shopping engine with Next.js.</p>
+          <div class="flex gap-2">
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-[10px] text-primary font-bold uppercase">React</span>
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-[10px] text-primary font-bold uppercase">Node</span>
           </div>
         </div>
       </div>
-      <div class="group relative overflow-hidden rounded-3xl border border-border" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110" />
-        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent p-8 flex flex-col justify-end">
-          <h3 class="text-2xl font-bold">AI Content Engine</h3>
-          <p class="text-foreground/60 mb-4">SaaS Platform for creators</p>
-          <div class="flex gap-4">
-            <i data-lucide="external-link" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
-            <i data-lucide="github" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
-          </div>
+      </div>
+  </div>
+</section>
+
+<section id="process" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-20">How I <span class="text-primary">Work</span></h2>
+    <div class="relative space-y-12 step-line">
+      <div class="relative flex items-start gap-8 group" data-aos="fade-up">
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 z-10 group-hover:scale-110 transition-transform">
+          <span class="text-white font-bold text-sm">01</span>
+        </div>
+        <div class="glass-card p-8 rounded-2xl flex-1">
+          <h3 class="text-xl font-bold mb-2">Discovery & Planning</h3>
+          <p class="text-foreground/60">We discuss your goals, target audience, and project requirements to create a solid roadmap.</p>
+        </div>
+      </div>
+      <div class="relative flex items-start gap-8 group" data-aos="fade-up">
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 z-10 group-hover:scale-110 transition-transform">
+          <span class="text-white font-bold text-sm">02</span>
+        </div>
+        <div class="glass-card p-8 rounded-2xl flex-1">
+          <h3 class="text-xl font-bold mb-2">Design & Prototype</h3>
+          <p class="text-foreground/60">I create high-fidelity UI/UX designs to ensure the look and feel align perfectly with your brand.</p>
+        </div>
+      </div>
+      <div class="relative flex items-start gap-8 group" data-aos="fade-up">
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 z-10 group-hover:scale-110 transition-transform">
+          <span class="text-white font-bold text-sm">03</span>
+        </div>
+        <div class="glass-card p-8 rounded-2xl flex-1">
+          <h3 class="text-xl font-bold mb-2">Development & Launch</h3>
+          <p class="text-foreground/60">Coding with the latest tech stack and deploying your project to a lightning-fast server.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="pricing" class="py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="glass-card p-8 rounded-3xl border-white/5">
-        <div class="text-sm font-bold text-primary mb-2">STARTER</div>
-        <div class="text-3xl font-bold mb-6">$499 <span class="text-sm font-normal text-foreground/40">/project</span></div>
-        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Single Page Site</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Responsive Design</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> SEO Setup</li>
-        </ul>
-        <button class="w-full py-3 rounded-xl border border-primary/20 hover:bg-primary transition-all font-bold">Select</button>
+<section id="fiverr" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="glass-card p-12 rounded-[3rem] bg-gradient-to-br from-primary/10 to-transparent flex flex-col md:flex-row items-center justify-between gap-12 border-primary/20">
+      <div class="space-y-6 md:max-w-xl" data-aos="fade-right">
+        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center">
+            <svg viewBox="0 0 40 40" class="w-10 h-10 fill-[#1dbf73]"><path d="M26.25 13.25H13.75V11.25H26.25V13.25ZM26.25 18.75H13.75V16.75H26.25V18.75ZM26.25 24.25H13.75V22.25H26.25V24.25ZM26.25 29.75H13.75V27.75H26.25V29.75Z"></path></svg>
+        </div>
+        <h2 class="text-4xl font-bold">Order My Services on <span class="text-[#1dbf73]">Fiverr</span></h2>
+        <p class="text-foreground/70">Need a safe and secure way to start? You can hire me directly through Fiverr for verified payments and 24/7 customer protection.</p>
+        <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-[#1dbf73] text-white rounded-2xl font-bold hover:scale-105 transition-all">
+          Go to Fiverr Gig <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+        </a>
       </div>
-      <div class="glass-card p-8 rounded-3xl border-primary relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-primary px-4 py-1 text-[10px] font-bold">POPULAR</div>
-        <div class="text-sm font-bold text-primary mb-2">PROFESSIONAL</div>
-        <div class="text-3xl font-bold mb-6">$999 <span class="text-sm font-normal text-foreground/40">/project</span></div>
-        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Multi-page Dynamic</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> CMS Integration</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Premium Animations</li>
-        </ul>
-        <button class="w-full py-3 rounded-xl bg-primary hover:opacity-90 transition-all font-bold">Select</button>
+      <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+        <div class="p-6 glass-card rounded-3xl text-center">
+            <h4 class="text-2xl font-bold">4.9/5</h4>
+            <p class="text-xs text-foreground/40">Fiverr Rating</p>
+        </div>
+        <div class="p-6 glass-card rounded-3xl text-center">
+            <h4 class="text-2xl font-bold">Level 2</h4>
+            <p class="text-xs text-foreground/40">Verified Seller</p>
+        </div>
       </div>
-      <div class="glass-card p-8 rounded-3xl border-white/5">
-        <div class="text-sm font-bold text-primary mb-2">ENTERPRISE</div>
-        <div class="text-3xl font-bold mb-6">Custom</div>
-        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Full Web App</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> API Development</li>
-          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Priority Support</li>
-        </ul>
-        <button class="w-full py-3 rounded-xl border border-primary/20 hover:bg-primary transition-all font-bold">Contact Us</button>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="py-24 px-6 bg-primary/[0.02]">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16">What My <span class="text-primary">Clients</span> Say</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="glass-card p-8 rounded-3xl" data-aos="fade-up">
+        <div class="flex gap-1 text-yellow-500 mb-6">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-foreground/70 italic mb-8">"Piash is an exceptional developer. He understood my requirements perfectly and delivered the project 2 days ahead of schedule. Highly recommended!"</p>
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-zinc-800 border border-border"></div>
+            <div>
+                <h4 class="font-bold">John Doe</h4>
+                <p class="text-xs text-foreground/40">CEO at TechFlow</p>
+            </div>
+        </div>
+      </div>
+      <div class="glass-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex gap-1 text-yellow-500 mb-6">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-foreground/70 italic mb-8">"The UI/UX work he did for my SaaS dashboard was incredible. The attention to detail is world-class."</p>
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-zinc-800 border border-border"></div>
+            <div>
+                <h4 class="font-bold">Sarah Smith</h4>
+                <p class="text-xs text-foreground/40">Marketing Manager</p>
+            </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section id="contact" class="py-24 px-6 border-t border-border">
-  <div class="max-w-2xl mx-auto">
-    <div class="text-center space-y-4 mb-12">
-      <h2 class="text-4xl font-bold">Let's Connect</h2>
-      <p class="text-foreground/60">Have a vision? Let’s make it a digital reality.</p>
-    </div>
-
-    <form class="space-y-4">
-      <div class="grid grid-cols-2 gap-4">
-        <input type="text" placeholder="First Name" class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all">
-        <input type="email" placeholder="Email Address" class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all">
-      </div>
-      <textarea rows="5" placeholder="Tell me about your project..." class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all"></textarea>
-      <button class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
-        Send Message
-      </button>
+  <div class="max-w-2xl mx-auto text-center space-y-8">
+    <h2 class="text-5xl font-bold">Have a Project?</h2>
+    <p class="text-foreground/60 text-lg">Send me a message and let's build something amazing together.</p>
+    <form class="space-y-4 text-left pt-8">
+      <input type="text" placeholder="Your Name" class="w-full bg-card border border-border p-5 rounded-2xl focus:border-primary outline-none transition-all">
+      <input type="email" placeholder="Email Address" class="w-full bg-card border border-border p-5 rounded-2xl focus:border-primary outline-none transition-all">
+      <textarea rows="5" placeholder="Message" class="w-full bg-card border border-border p-5 rounded-2xl focus:border-primary outline-none transition-all"></textarea>
+      <button class="w-full py-5 bg-primary text-white font-bold rounded-2xl hover:bg-opacity-90 transition-all shadow-xl shadow-primary/20">Send Message</button>
     </form>
   </div>
 </section>
 
-<footer class="py-12 text-center text-foreground/40 border-t border-border bg-card">
-  <div class="flex justify-center gap-6 mb-8">
-    <i data-lucide="twitter" class="w-5 h-5 hover:text-primary transition-colors"></i>
-    <i data-lucide="linkedin" class="w-5 h-5 hover:text-primary transition-colors"></i>
-    <i data-lucide="instagram" class="w-5 h-5 hover:text-primary transition-colors"></i>
+<footer class="py-12 border-t border-border bg-card/50">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="text-xl font-bold tracking-tighter">PIASH<span class="text-primary">.</span></div>
+    <div class="flex gap-8 text-sm text-foreground/40 font-medium">
+        <a href="#" class="hover:text-primary transition-colors">Twitter</a>
+        <a href="#" class="hover:text-primary transition-colors">GitHub</a>
+        <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
+    </div>
+    <p class="text-xs text-foreground/30 uppercase tracking-[0.2em]">© 2026 PIASH JODDER. All rights reserved.</p>
   </div>
-  <p class="text-xs uppercase tracking-widest">© 2026 PIASH JODDER. Built with precision.</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
