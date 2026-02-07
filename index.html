@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Piash Jodder | Web Developer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Piash Jodder | Responsive Portfolio</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -14,11 +15,26 @@
       theme: {
         extend: {
           colors: {
-            bg: "#020617",
-            card: "#020617",
-            border: "#1e293b",
-            muted: "#94a3b8",
-            primary: "#3b82f6",
+            border: "hsl(var(--border))",
+            background: "hsl(var(--background))",
+            foreground: "hsl(var(--foreground))",
+            muted: "hsl(var(--muted))",
+            primary: "hsl(var(--primary))",
+            card: "hsl(var(--card))",
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'gradient': 'gradient 8s ease infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            gradient: {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+            }
           }
         }
       }
@@ -26,160 +42,363 @@
   </script>
 
   <style>
-    body {
-      font-family: Inter, system-ui, sans-serif;
-      background: #020617;
-      color: #f8fafc;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+    :root {
+      --background: 240 10% 4%;
+      --foreground: 0 0% 98%;
+      --muted: 240 4% 16%;
+      --primary: 217 91% 60%;
+      --card: 240 10% 6%;
+      --border: 240 4% 16%;
     }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      overflow-x: hidden;
+    }
+
     .card {
-      border: 1px solid #1e293b;
-      border-radius: 14px;
-      background: #020617;
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: hsl(var(--primary) / 0.3);
+      transform: translateY(-4px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #60a5fa, #3b82f6, #8b5cf6);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient 8s ease infinite;
+    }
+
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        hsl(var(--primary) / 0.5), 
+        transparent
+      );
     }
   </style>
 </head>
 
 <body>
 
-<!-- NAVBAR (NO HAMBURGER) -->
-<nav class="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur border-b border-border">
-  <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-    <div class="font-black text-lg tracking-tight">
-      PIASH<span class="text-primary">.</span>
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur border-b border-border">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="font-black tracking-tight text-lg">
+      PIASH<span class="text-blue-500">.</span>
     </div>
 
     <div class="hidden sm:flex gap-6 text-sm font-semibold">
-      <a href="#about" class="hover:text-primary">About</a>
-      <a href="#skills" class="hover:text-primary">Skills</a>
-      <a href="#contact" class="hover:text-primary">Contact</a>
+      <a href="#about" class="hover:text-blue-500 transition-colors">About</a>
+      <a href="#projects" class="hover:text-blue-500 transition-colors">Projects</a>
+      <a href="#pricing" class="hover:text-blue-500 transition-colors">Pricing</a>
+      <a href="#more" class="hover:text-blue-500 transition-colors">More</a>
+      <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20">
-  <div class="space-y-6 max-w-3xl">
-    <span class="text-xs font-bold border border-border px-4 py-1 rounded-full">
-      WEB DEVELOPER
+  <div data-aos="fade-up" class="space-y-6 max-w-3xl">
+    <span class="text-xs font-bold border border-border px-3 py-1 rounded-full glass-effect">
+      AVAILABLE FOR FREELANCE
     </span>
 
-    <h1 class="text-4xl sm:text-6xl font-black tracking-tight">
-      Building Modern <br>
-      <span class="text-primary">Web Experiences</span>
+    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight">
+      High-End Web <br><span class="gradient-text">Experiences</span>
     </h1>
 
     <p class="text-muted text-sm sm:text-lg">
-      I create fast, responsive and user-friendly websites using modern technologies.
+      I build modern, fast and scalable web apps with clean UI/UX.
     </p>
 
-    <div class="flex justify-center gap-4 flex-wrap">
-      <a href="#contact" class="bg-primary px-8 py-3 rounded-xl font-bold">
-        Hire Me
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#contact" class="bg-primary text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+        Start a Project
       </a>
-      <a href="#about" class="border border-border px-8 py-3 rounded-xl font-bold">
-        About Me
+      <a href="#projects" class="border border-border px-8 py-4 rounded-xl font-bold hover:border-blue-500 transition-colors">
+        View Work
       </a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT SECTION -->
-<section id="about" class="py-24 px-4 border-t border-border">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-    <!-- ABOUT TEXT -->
-    <div class="space-y-6">
-      <h2 class="text-3xl sm:text-5xl font-black">About Me</h2>
-
-      <p class="text-muted leading-relaxed">
-        Hi, I’m <strong class="text-white">Piash Jodder</strong>, a passionate web developer.
-        I mainly use my <strong class="text-white">mobile phone</strong> for daily development,
-        testing UI responsiveness and real-world user experience.
+<!-- ENHANCED ABOUT SECTION -->
+<section id="about" class="py-24 px-4 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto relative">
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-xs font-bold text-primary bg-blue-500/10 px-4 py-2 rounded-full">
+        ABOUT ME
+      </span>
+      <h2 class="text-4xl md:text-5xl font-black mt-4 mb-6">
+        Crafting Digital <span class="gradient-text">Experiences</span>
+      </h2>
+      <p class="text-muted max-w-2xl mx-auto">
+        With over 5 years of expertise in web development, I bridge backend logic with pixel-perfect frontend design.
       </p>
+    </div>
 
-      <p class="text-muted leading-relaxed">
-        I focus on clean design, mobile-first layouts and performance-optimized code.
-        My goal is to build websites that look professional and work smoothly on all devices.
-      </p>
+    <!-- Main Content -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Column - Profile -->
+      <div data-aos="fade-right" class="space-y-8">
+        <div class="relative group">
+          <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800"
+                 class="rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full aspect-video object-cover"
+                 alt="About Me" />
+          </div>
+        </div>
 
-      <!-- INFO GRID -->
-      <div class="grid grid-cols-2 gap-4 pt-4">
-        <div class="card p-4">
-          <p class="text-xs text-muted">Age</p>
-          <p class="font-bold">20+</p>
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="card p-4 text-center group hover:border-blue-500/50">
+            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">50+</div>
+            <div class="text-xs text-muted mt-2">Projects</div>
+          </div>
+          <div class="card p-4 text-center group hover:border-blue-500/50">
+            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">100%</div>
+            <div class="text-xs text-muted mt-2">Satisfaction</div>
+          </div>
+          <div class="card p-4 text-center group hover:border-blue-500/50">
+            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">5+</div>
+            <div class="text-xs text-muted mt-2">Years Experience</div>
+          </div>
+          <div class="card p-4 text-center group hover:border-blue-500/50">
+            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">24/7</div>
+            <div class="text-xs text-muted mt-2">Support</div>
+          </div>
         </div>
-        <div class="card p-4">
-          <p class="text-xs text-muted">Education</p>
-          <p class="font-bold">HSC (Running)</p>
+      </div>
+
+      <!-- Right Column - Content -->
+      <div data-aos="fade-left" class="space-y-8">
+        <!-- Philosophy Card -->
+        <div class="card p-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+              <i data-lucide="sparkles" class="text-blue-500"></i>
+            </div>
+            <h3 class="text-xl font-bold">My Philosophy</h3>
+          </div>
+          <p class="text-muted mb-6">
+            I believe great digital products combine aesthetic appeal with functional excellence. 
+            Every line of code should serve a purpose towards creating intuitive, accessible, 
+            and performant user experiences.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-primary">
+            <i data-lucide="arrow-right"></i>
+            <span>Mobile-first, performance-focused approach</span>
+          </div>
         </div>
-        <div class="card p-4">
-          <p class="text-xs text-muted">Device</p>
-          <p class="font-bold">Mobile Phone</p>
+
+        <!-- Skills Progress -->
+        <div class="space-y-6">
+          <h4 class="text-lg font-bold">Core Expertise</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Frontend Development</span>
+                <span class="text-primary">95%</span>
+              </div>
+              <div class="h-2 bg-muted rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[95%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>UI/UX Design</span>
+                <span class="text-primary">90%</span>
+              </div>
+              <div class="h-2 bg-muted rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[90%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Backend Systems</span>
+                <span class="text-primary">85%</span>
+              </div>
+              <div class="h-2 bg-muted rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[85%]"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card p-4">
-          <p class="text-xs text-muted">Location</p>
-          <p class="font-bold">Bangladesh</p>
+
+        <!-- CTA Button -->
+        <div class="flex gap-4">
+          <a href="#contact" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold text-center hover:opacity-90 transition-opacity">
+            Work With Me
+          </a>
+          <a href="#more" class="flex-1 border border-border px-6 py-3 rounded-xl font-bold text-center hover:border-blue-500 transition-colors">
+            View Skills
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- SIDE CARD -->
-    <div class="card p-8 space-y-4">
-      <h3 class="font-bold text-xl">Developer Info</h3>
+    <!-- Divider -->
+    <div class="section-divider my-16"></div>
 
-      <ul class="text-sm text-muted space-y-3">
-        <li>✔ Frontend & Backend Developer</li>
-        <li>✔ Mobile-first UI/UX</li>
-        <li>✔ HTML, CSS, Tailwind, JS</li>
-        <li>✔ PHP, MySQL, WordPress</li>
-        <li>✔ Freelance & Personal Projects</li>
-      </ul>
+    <!-- Approach Section -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="zap" class="text-blue-500"></i>
+        </div>
+        <h4 class="font-bold mb-2">Fast & Efficient</h4>
+        <p class="text-sm text-muted">Optimized code and modern practices for lightning-fast performance</p>
+      </div>
+      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="users" class="text-blue-500"></i>
+        </div>
+        <h4 class="font-bold mb-2">User-Centered</h4>
+        <p class="text-sm text-muted">Designs that prioritize user needs and create intuitive experiences</p>
+      </div>
+      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="shield" class="text-blue-500"></i>
+        </div>
+        <h4 class="font-bold mb-2">Scalable & Secure</h4>
+        <p class="text-sm text-muted">Future-proof architecture with security best practices</p>
+      </div>
     </div>
-
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills" class="py-24 px-4">
-  <div class="max-w-5xl mx-auto text-center">
-    <h2 class="text-3xl sm:text-5xl font-black mb-10">Skills</h2>
+<!-- PROJECTS -->
+<section id="projects" class="py-24 px-4">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">Projects</h2>
 
-    <div class="flex flex-wrap justify-center gap-3">
-      <span class="border border-border px-4 py-2 rounded-full text-sm">HTML</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">CSS</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">Tailwind CSS</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">JavaScript</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">PHP</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">MySQL</span>
-      <span class="border border-border px-4 py-2 rounded-full text-sm">WordPress</span>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
+             class="h-40 w-full object-cover">
+        <div class="p-5 space-y-2">
+          <h3 class="font-bold">SaaS Dashboard</h3>
+          <p class="text-sm text-muted">Analytics & admin panel</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-24 px-4 bg-muted/30">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-5xl font-black mb-12">Pricing</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-8 space-y-4">
+        <h3 class="font-bold">Basic</h3>
+        <div class="text-4xl font-black">$199</div>
+        <p class="text-sm text-muted">Landing page</p>
+      </div>
+
+      <div class="card p-8 space-y-4 border-blue-500">
+        <h3 class="font-bold">Pro</h3>
+        <div class="text-4xl font-black">$499</div>
+        <p class="text-sm text-muted">Multi-page site</p>
+      </div>
+
+      <div class="card p-8 space-y-4">
+        <h3 class="font-bold">Custom</h3>
+        <div class="text-4xl font-black">$899+</div>
+        <p class="text-sm text-muted">Full system</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE SECTION -->
+<section id="more" class="py-24 px-4 border-t border-border">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">
+      More About My Work
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="card p-8 space-y-4">
+        <h3 class="font-bold text-xl">Skills</h3>
+        <ul class="text-sm text-muted space-y-2">
+          <li>✔ HTML, CSS, Tailwind</li>
+          <li>✔ JavaScript, React</li>
+          <li>✔ PHP, MySQL</li>
+          <li>✔ UI/UX & Performance</li>
+        </ul>
+      </div>
+
+      <div class="card p-8 space-y-4">
+        <h3 class="font-bold text-xl">Services</h3>
+        <ul class="text-sm text-muted space-y-2">
+          <li>✔ Portfolio & Business Websites</li>
+          <li>✔ SaaS & Dashboard UI</li>
+          <li>✔ Landing Pages</li>
+          <li>✔ Custom Web Apps</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="py-24 px-4 border-t border-border">
+<section id="contact" class="py-24 px-4">
   <div class="max-w-xl mx-auto text-center space-y-6">
     <h2 class="text-4xl font-black">Contact Me</h2>
 
-    <form class="card p-6 space-y-4">
-      <input class="w-full p-3 bg-transparent border border-border rounded" placeholder="Your Name">
-      <input class="w-full p-3 bg-transparent border border-border rounded" placeholder="Email">
-      <textarea rows="4" class="w-full p-3 bg-transparent border border-border rounded"
-        placeholder="Your message"></textarea>
-
-      <button class="w-full bg-primary py-3 rounded-xl font-bold">
-        Send Message
-      </button>
+    <form class="card p-6 space-y-4 text-left">
+      <input class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" placeholder="Name">
+      <input class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" placeholder="Email">
+      <textarea class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" rows="4"
+                placeholder="Your project"></textarea>
+      <button class="w-full bg-primary py-3 rounded font-bold hover:opacity-90 transition-opacity">Send Message</button>
     </form>
   </div>
 </section>
 
 <footer class="py-8 text-center text-xs text-muted border-t border-border">
-  © 2026 Piash Jodder. All Rights Reserved.
+  © 2026 Piash Jodder
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   lucide.createIcons();
+  AOS.init({ 
+    once: true,
+    duration: 800,
+    offset: 100
+  });
 </script>
 
 </body>
