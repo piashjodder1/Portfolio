@@ -2,8 +2,8 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Piash Jodder | Responsive Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Piash Jodder | Premium Portfolio</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -15,380 +15,276 @@
       theme: {
         extend: {
           colors: {
-            border: "hsl(var(--border))",
-            background: "hsl(var(--background))",
-            foreground: "hsl(var(--foreground))",
-            muted: "hsl(var(--muted))",
-            primary: "hsl(var(--primary))",
-            card: "hsl(var(--card))",
-          },
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-            'gradient': 'gradient 8s ease infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-20px)' },
+            border: "hsl(263, 30%, 15%)",
+            background: "hsl(263, 40%, 2%)",
+            foreground: "hsl(210, 20%, 98%)",
+            muted: "hsl(263, 20%, 10%)",
+            primary: {
+              DEFAULT: "hsl(263, 70%, 50%)",
+              foreground: "hsl(210, 20%, 98%)",
             },
-            gradient: {
-              '0%, 100%': { 'background-position': '0% 50%' },
-              '50%': { 'background-position': '100% 50%' },
-            }
-          }
+            accent: "hsl(263, 50%, 40%)",
+            card: "hsl(263, 40%, 4%)",
+          },
         }
       }
     }
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     :root {
-      --background: 240 10% 4%;
-      --foreground: 0 0% 98%;
-      --muted: 240 4% 16%;
-      --primary: 217 91% 60%;
-      --card: 240 10% 6%;
-      --border: 240 4% 16%;
+      --primary-glow: radial-gradient(rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0));
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: hsl(var(--background));
-      color: hsl(var(--foreground));
-      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: hsl(263, 40%, 2%);
+      color: hsl(210, 20%, 98%);
+      overflow-x: hidden; /* Fixes the side scrollbar issue */
+      width: 100%;
     }
 
-    .card {
-      background: hsl(var(--card));
-      border: 1px solid hsl(var(--border));
-      border-radius: 0.75rem;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: hsl(var(--primary) / 0.3);
-      transform: translateY(-4px);
+    /* Shadcn-like subtle glassmorphism */
+    .glass-card {
+      background: rgba(15, 10, 25, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid hsl(263, 30%, 15%);
     }
 
     .gradient-text {
-      background: linear-gradient(90deg, #60a5fa, #3b82f6, #8b5cf6);
-      background-size: 200% 200%;
+      background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #4c1d95 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: gradient 8s ease infinite;
     }
 
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent, 
-        hsl(var(--primary) / 0.5), 
-        transparent
-      );
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: 0.5s;
     }
+
+    .shimmer-btn:hover::after {
+      left: 120%;
+    }
+
+    /* Custom scrollbar for a pro look */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: hsl(263, 40%, 2%); }
+    ::-webkit-scrollbar-thumb { background: hsl(263, 30%, 15%); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(263, 70%, 50%); }
   </style>
 </head>
 
-<body>
+<body class="selection:bg-primary/30">
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur border-b border-border">
-  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-    <div class="font-black tracking-tight text-lg">
-      PIASH<span class="text-blue-500">.</span>
+<nav class="fixed top-0 w-full z-50 border-b border-border/50 bg-background/60 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="text-xl font-bold tracking-tighter flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">P</div>
+      <span>PIASH<span class="text-primary">.</span></span>
     </div>
-
-    <div class="hidden sm:flex gap-6 text-sm font-semibold">
-      <a href="#about" class="hover:text-blue-500 transition-colors">About</a>
-      <a href="#projects" class="hover:text-blue-500 transition-colors">Projects</a>
-      <a href="#pricing" class="hover:text-blue-500 transition-colors">Pricing</a>
-      <a href="#more" class="hover:text-blue-500 transition-colors">More</a>
-      <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/60">
+      <a href="#about" class="hover:text-primary transition-colors">About</a>
+      <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
+      <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
+      <a href="#contact" class="px-4 py-2 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-all">Get in Touch</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center text-center px-4 pt-20">
-  <div data-aos="fade-up" class="space-y-6 max-w-3xl">
-    <span class="text-xs font-bold border border-border px-3 py-1 rounded-full glass-effect">
-      AVAILABLE FOR FREELANCE
-    </span>
-
-    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight">
-      High-End Web <br><span class="gradient-text">Experiences</span>
+<section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full"></div>
+  
+  <div class="relative z-10 max-w-4xl text-center space-y-8" data-aos="zoom-out">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+      </span>
+      Open for New Projects
+    </div>
+    
+    <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight leading-[1.1]">
+      Building the <span class="gradient-text">Future</span> of the Web
     </h1>
-
-    <p class="text-muted text-sm sm:text-lg">
-      I build modern, fast and scalable web apps with clean UI/UX.
+    
+    <p class="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">
+      Freelance Full-stack Developer specializing in high-performance digital products and immersive UI experiences.
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#contact" class="bg-primary text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#contact" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/20">
         Start a Project
       </a>
-      <a href="#projects" class="border border-border px-8 py-4 rounded-xl font-bold hover:border-blue-500 transition-colors">
-        View Work
+      <a href="#projects" class="w-full sm:w-auto px-8 py-4 glass-card rounded-2xl font-bold hover:bg-white/5 transition-colors">
+        View Gallery
       </a>
     </div>
   </div>
 </section>
 
-<!-- ENHANCED ABOUT SECTION -->
-<section id="about" class="py-24 px-4 relative overflow-hidden">
-  <!-- Background Elements -->
-  <div class="absolute inset-0">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+<section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+  <div class="mb-16">
+    <h2 class="text-3xl font-bold mb-4">Core Philosophy</h2>
+    <div class="h-1 w-20 bg-primary rounded-full"></div>
   </div>
-  
-  <div class="max-w-7xl mx-auto relative">
-    <!-- Section Header -->
-    <div class="text-center mb-16" data-aos="fade-up">
-      <span class="text-xs font-bold text-primary bg-blue-500/10 px-4 py-2 rounded-full">
-        ABOUT ME
-      </span>
-      <h2 class="text-4xl md:text-5xl font-black mt-4 mb-6">
-        Crafting Digital <span class="gradient-text">Experiences</span>
-      </h2>
-      <p class="text-muted max-w-2xl mx-auto">
-        With over 5 years of expertise in web development, I bridge backend logic with pixel-perfect frontend design.
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="md:col-span-2 glass-card p-8 rounded-3xl space-y-4" data-aos="fade-right">
+      <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
+        <i data-lucide="code-2" class="text-primary"></i>
+      </div>
+      <h3 class="text-2xl font-bold">The Technical Edge</h3>
+      <p class="text-foreground/60 leading-relaxed">
+        I don't just "build websites." I engineer scalable infrastructures using React, Tailwind, and high-performance backend systems. Every project is optimized for <span class="text-white font-semibold">Core Web Vitals</span> and search engine visibility.
       </p>
     </div>
 
-    <!-- Main Content -->
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <!-- Left Column - Profile -->
-      <div data-aos="fade-right" class="space-y-8">
-        <div class="relative group">
-          <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800"
-                 class="rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full aspect-video object-cover"
-                 alt="About Me" />
-          </div>
-        </div>
+    <div class="glass-card p-8 rounded-3xl text-center flex flex-col justify-center items-center" data-aos="fade-left">
+      <div class="text-5xl font-black text-primary mb-2">5+</div>
+      <p class="text-sm uppercase tracking-widest font-bold">Years Experience</p>
+    </div>
 
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="card p-4 text-center group hover:border-blue-500/50">
-            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">50+</div>
-            <div class="text-xs text-muted mt-2">Projects</div>
-          </div>
-          <div class="card p-4 text-center group hover:border-blue-500/50">
-            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">100%</div>
-            <div class="text-xs text-muted mt-2">Satisfaction</div>
-          </div>
-          <div class="card p-4 text-center group hover:border-blue-500/50">
-            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">5+</div>
-            <div class="text-xs text-muted mt-2">Years Experience</div>
-          </div>
-          <div class="card p-4 text-center group hover:border-blue-500/50">
-            <div class="text-2xl font-black text-primary group-hover:scale-110 transition-transform">24/7</div>
-            <div class="text-xs text-muted mt-2">Support</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column - Content -->
-      <div data-aos="fade-left" class="space-y-8">
-        <!-- Philosophy Card -->
-        <div class="card p-8">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
-              <i data-lucide="sparkles" class="text-blue-500"></i>
-            </div>
-            <h3 class="text-xl font-bold">My Philosophy</h3>
-          </div>
-          <p class="text-muted mb-6">
-            I believe great digital products combine aesthetic appeal with functional excellence. 
-            Every line of code should serve a purpose towards creating intuitive, accessible, 
-            and performant user experiences.
-          </p>
-          <div class="flex items-center gap-2 text-sm text-primary">
-            <i data-lucide="arrow-right"></i>
-            <span>Mobile-first, performance-focused approach</span>
-          </div>
-        </div>
-
-        <!-- Skills Progress -->
-        <div class="space-y-6">
-          <h4 class="text-lg font-bold">Core Expertise</h4>
-          <div class="space-y-4">
-            <div>
-              <div class="flex justify-between text-sm mb-2">
-                <span>Frontend Development</span>
-                <span class="text-primary">95%</span>
-              </div>
-              <div class="h-2 bg-muted rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[95%]"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-2">
-                <span>UI/UX Design</span>
-                <span class="text-primary">90%</span>
-              </div>
-              <div class="h-2 bg-muted rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[90%]"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-2">
-                <span>Backend Systems</span>
-                <span class="text-primary">85%</span>
-              </div>
-              <div class="h-2 bg-muted rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[85%]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA Button -->
-        <div class="flex gap-4">
-          <a href="#contact" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold text-center hover:opacity-90 transition-opacity">
-            Work With Me
-          </a>
-          <a href="#more" class="flex-1 border border-border px-6 py-3 rounded-xl font-bold text-center hover:border-blue-500 transition-colors">
-            View Skills
-          </a>
-        </div>
+    <div class="glass-card p-8 rounded-3xl" data-aos="fade-up">
+      <h4 class="font-bold mb-6 flex items-center gap-2">
+        <i data-lucide="layers" class="w-4 h-4"></i> Stack
+      </h4>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">Next.js</span>
+        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">TypeScript</span>
+        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">PostgreSQL</span>
+        <span class="px-3 py-1 bg-white/5 border border-border rounded-md text-xs">Tailwind</span>
       </div>
     </div>
 
-    <!-- Divider -->
-    <div class="section-divider my-16"></div>
-
-    <!-- Approach Section -->
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="zap" class="text-blue-500"></i>
-        </div>
-        <h4 class="font-bold mb-2">Fast & Efficient</h4>
-        <p class="text-sm text-muted">Optimized code and modern practices for lightning-fast performance</p>
+    <div class="md:col-span-2 glass-card p-8 rounded-3xl flex items-center justify-between" data-aos="fade-up" data-aos-delay="100">
+      <div>
+        <h3 class="text-xl font-bold">Global Delivery</h3>
+        <p class="text-foreground/60">Delivering quality to clients worldwide.</p>
       </div>
-      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="200">
-        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="users" class="text-blue-500"></i>
-        </div>
-        <h4 class="font-bold mb-2">User-Centered</h4>
-        <p class="text-sm text-muted">Designs that prioritize user needs and create intuitive experiences</p>
-      </div>
-      <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
-        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="shield" class="text-blue-500"></i>
-        </div>
-        <h4 class="font-bold mb-2">Scalable & Secure</h4>
-        <p class="text-sm text-muted">Future-proof architecture with security best practices</p>
+      <div class="flex -space-x-3">
+        <div class="w-10 h-10 rounded-full border-2 border-card bg-zinc-800"></div>
+        <div class="w-10 h-10 rounded-full border-2 border-card bg-zinc-700"></div>
+        <div class="w-10 h-10 rounded-full border-2 border-card bg-primary flex items-center justify-center text-[10px] font-bold">+50</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="py-24 px-4">
+<section id="projects" class="py-24 px-6 bg-primary/[0.02]">
   <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">Projects</h2>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="card overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
-             class="h-40 w-full object-cover">
-        <div class="p-5 space-y-2">
-          <h3 class="font-bold">SaaS Dashboard</h3>
-          <p class="text-sm text-muted">Analytics & admin panel</p>
-        </div>
-      </div>
+    <div class="text-center mb-16 space-y-4">
+      <h2 class="text-4xl font-bold">Selected Works</h2>
+      <p class="text-foreground/60">Where logic meets creativity.</p>
     </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="py-24 px-4 bg-muted/30">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-5xl font-black mb-12">Pricing</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold">Basic</h3>
-        <div class="text-4xl font-black">$199</div>
-        <p class="text-sm text-muted">Landing page</p>
-      </div>
-
-      <div class="card p-8 space-y-4 border-blue-500">
-        <h3 class="font-bold">Pro</h3>
-        <div class="text-4xl font-black">$499</div>
-        <p class="text-sm text-muted">Multi-page site</p>
-      </div>
-
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold">Custom</h3>
-        <div class="text-4xl font-black">$899+</div>
-        <p class="text-sm text-muted">Full system</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MORE SECTION -->
-<section id="more" class="py-24 px-4 border-t border-border">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">
-      More About My Work
-    </h2>
 
     <div class="grid md:grid-cols-2 gap-8">
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold text-xl">Skills</h3>
-        <ul class="text-sm text-muted space-y-2">
-          <li>✔ HTML, CSS, Tailwind</li>
-          <li>✔ JavaScript, React</li>
-          <li>✔ PHP, MySQL</li>
-          <li>✔ UI/UX & Performance</li>
-        </ul>
+      <div class="group relative overflow-hidden rounded-3xl border border-border" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent p-8 flex flex-col justify-end">
+          <h3 class="text-2xl font-bold">Fintech Dashboard</h3>
+          <p class="text-foreground/60 mb-4">Enterprise level analytics</p>
+          <div class="flex gap-4">
+            <i data-lucide="external-link" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
+            <i data-lucide="github" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
+          </div>
+        </div>
       </div>
-
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold text-xl">Services</h3>
-        <ul class="text-sm text-muted space-y-2">
-          <li>✔ Portfolio & Business Websites</li>
-          <li>✔ SaaS & Dashboard UI</li>
-          <li>✔ Landing Pages</li>
-          <li>✔ Custom Web Apps</li>
-        </ul>
+      <div class="group relative overflow-hidden rounded-3xl border border-border" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent p-8 flex flex-col justify-end">
+          <h3 class="text-2xl font-bold">AI Content Engine</h3>
+          <p class="text-foreground/60 mb-4">SaaS Platform for creators</p>
+          <div class="flex gap-4">
+            <i data-lucide="external-link" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
+            <i data-lucide="github" class="w-5 h-5 hover:text-primary cursor-pointer"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="py-24 px-4">
-  <div class="max-w-xl mx-auto text-center space-y-6">
-    <h2 class="text-4xl font-black">Contact Me</h2>
+<section id="pricing" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card p-8 rounded-3xl border-white/5">
+        <div class="text-sm font-bold text-primary mb-2">STARTER</div>
+        <div class="text-3xl font-bold mb-6">$499 <span class="text-sm font-normal text-foreground/40">/project</span></div>
+        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Single Page Site</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Responsive Design</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> SEO Setup</li>
+        </ul>
+        <button class="w-full py-3 rounded-xl border border-primary/20 hover:bg-primary transition-all font-bold">Select</button>
+      </div>
+      <div class="glass-card p-8 rounded-3xl border-primary relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-primary px-4 py-1 text-[10px] font-bold">POPULAR</div>
+        <div class="text-sm font-bold text-primary mb-2">PROFESSIONAL</div>
+        <div class="text-3xl font-bold mb-6">$999 <span class="text-sm font-normal text-foreground/40">/project</span></div>
+        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Multi-page Dynamic</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> CMS Integration</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Premium Animations</li>
+        </ul>
+        <button class="w-full py-3 rounded-xl bg-primary hover:opacity-90 transition-all font-bold">Select</button>
+      </div>
+      <div class="glass-card p-8 rounded-3xl border-white/5">
+        <div class="text-sm font-bold text-primary mb-2">ENTERPRISE</div>
+        <div class="text-3xl font-bold mb-6">Custom</div>
+        <ul class="space-y-4 text-sm text-foreground/60 mb-8">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Full Web App</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> API Development</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Priority Support</li>
+        </ul>
+        <button class="w-full py-3 rounded-xl border border-primary/20 hover:bg-primary transition-all font-bold">Contact Us</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <form class="card p-6 space-y-4 text-left">
-      <input class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" placeholder="Name">
-      <input class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" placeholder="Email">
-      <textarea class="w-full p-3 bg-muted border border-border rounded focus:border-blue-500 focus:outline-none transition-colors" rows="4"
-                placeholder="Your project"></textarea>
-      <button class="w-full bg-primary py-3 rounded font-bold hover:opacity-90 transition-opacity">Send Message</button>
+<section id="contact" class="py-24 px-6 border-t border-border">
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center space-y-4 mb-12">
+      <h2 class="text-4xl font-bold">Let's Connect</h2>
+      <p class="text-foreground/60">Have a vision? Let’s make it a digital reality.</p>
+    </div>
+
+    <form class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <input type="text" placeholder="First Name" class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all">
+        <input type="email" placeholder="Email Address" class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all">
+      </div>
+      <textarea rows="5" placeholder="Tell me about your project..." class="w-full bg-card border border-border p-4 rounded-2xl focus:border-primary outline-none transition-all"></textarea>
+      <button class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
+        Send Message
+      </button>
     </form>
   </div>
 </section>
 
-<footer class="py-8 text-center text-xs text-muted border-t border-border">
-  © 2026 Piash Jodder
+<footer class="py-12 text-center text-foreground/40 border-t border-border bg-card">
+  <div class="flex justify-center gap-6 mb-8">
+    <i data-lucide="twitter" class="w-5 h-5 hover:text-primary transition-colors"></i>
+    <i data-lucide="linkedin" class="w-5 h-5 hover:text-primary transition-colors"></i>
+    <i data-lucide="instagram" class="w-5 h-5 hover:text-primary transition-colors"></i>
+  </div>
+  <p class="text-xs uppercase tracking-widest">© 2026 PIASH JODDER. Built with precision.</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -396,8 +292,8 @@
   lucide.createIcons();
   AOS.init({ 
     once: true,
-    duration: 800,
-    offset: 100
+    duration: 1000,
+    offset: 50
   });
 </script>
 
