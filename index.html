@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Piash Jodder | Responsive Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piash Jodder | Web Developer</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -15,12 +14,11 @@
       theme: {
         extend: {
           colors: {
-            border: "hsl(var(--border))",
-            background: "hsl(var(--background))",
-            foreground: "hsl(var(--foreground))",
-            muted: "hsl(var(--muted))",
-            primary: "hsl(var(--primary))",
-            card: "hsl(var(--card))",
+            bg: "#020617",
+            card: "#020617",
+            border: "#1e293b",
+            muted: "#94a3b8",
+            primary: "#3b82f6",
           }
         }
       }
@@ -28,202 +26,160 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-
-    :root {
-      --background: 240 10% 4%;
-      --foreground: 0 0% 98%;
-      --muted: 240 4% 16%;
-      --primary: 217 91% 60%;
-      --card: 240 10% 6%;
-      --border: 240 4% 16%;
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: hsl(var(--background));
-      color: hsl(var(--foreground));
+      font-family: Inter, system-ui, sans-serif;
+      background: #020617;
+      color: #f8fafc;
     }
-
     .card {
-      background: hsl(var(--card));
-      border: 1px solid hsl(var(--border));
-      border-radius: 0.75rem;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      background: #020617;
     }
   </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur border-b border-border">
-  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-    <div class="font-black tracking-tight text-lg">
-      PIASH<span class="text-blue-500">.</span>
+<!-- NAVBAR (NO HAMBURGER) -->
+<nav class="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur border-b border-border">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+    <div class="font-black text-lg tracking-tight">
+      PIASH<span class="text-primary">.</span>
     </div>
 
     <div class="hidden sm:flex gap-6 text-sm font-semibold">
-      <a href="#about" class="hover:text-blue-500">About</a>
-      <a href="#projects" class="hover:text-blue-500">Projects</a>
-      <a href="#pricing" class="hover:text-blue-500">Pricing</a>
-      <a href="#more" class="hover:text-blue-500">More</a>
-      <a href="#contact" class="hover:text-blue-500">Contact</a>
+      <a href="#about" class="hover:text-primary">About</a>
+      <a href="#skills" class="hover:text-primary">Skills</a>
+      <a href="#contact" class="hover:text-primary">Contact</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="min-h-screen flex items-center justify-center text-center px-4 pt-20">
-  <div data-aos="fade-up" class="space-y-6 max-w-3xl">
-    <span class="text-xs font-bold border border-border px-3 py-1 rounded-full">
-      AVAILABLE FOR FREELANCE
+  <div class="space-y-6 max-w-3xl">
+    <span class="text-xs font-bold border border-border px-4 py-1 rounded-full">
+      WEB DEVELOPER
     </span>
 
-    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight">
-      High-End Web <br><span class="text-blue-500">Experiences</span>
+    <h1 class="text-4xl sm:text-6xl font-black tracking-tight">
+      Building Modern <br>
+      <span class="text-primary">Web Experiences</span>
     </h1>
 
     <p class="text-muted text-sm sm:text-lg">
-      I build modern, fast and scalable web apps with clean UI/UX.
+      I create fast, responsive and user-friendly websites using modern technologies.
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#contact" class="bg-primary text-white px-8 py-4 rounded-xl font-bold">
-        Start a Project
+    <div class="flex justify-center gap-4 flex-wrap">
+      <a href="#contact" class="bg-primary px-8 py-3 rounded-xl font-bold">
+        Hire Me
       </a>
-      <a href="#projects" class="border border-border px-8 py-4 rounded-xl font-bold">
-        View Work
+      <a href="#about" class="border border-border px-8 py-3 rounded-xl font-bold">
+        About Me
       </a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT SECTION -->
 <section id="about" class="py-24 px-4 border-t border-border">
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800"
-         class="rounded-xl grayscale hover:grayscale-0 transition" />
 
+    <!-- ABOUT TEXT -->
     <div class="space-y-6">
-      <h2 class="text-3xl md:text-5xl font-black">About Me</h2>
-      <p class="text-muted">
-        I bridge backend logic with pixel-perfect frontend. Mobile-first,
-        performance-focused and scalable systems are my thing.
+      <h2 class="text-3xl sm:text-5xl font-black">About Me</h2>
+
+      <p class="text-muted leading-relaxed">
+        Hi, I’m <strong class="text-white">Piash Jodder</strong>, a passionate web developer.
+        I mainly use my <strong class="text-white">mobile phone</strong> for daily development,
+        testing UI responsiveness and real-world user experience.
       </p>
 
-      <div class="flex gap-6">
-        <div>
-          <div class="text-3xl font-black">50+</div>
-          <div class="text-xs text-muted">Projects</div>
-        </div>
-        <div>
-          <div class="text-3xl font-black">100%</div>
-          <div class="text-xs text-muted">Satisfaction</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      <p class="text-muted leading-relaxed">
+        I focus on clean design, mobile-first layouts and performance-optimized code.
+        My goal is to build websites that look professional and work smoothly on all devices.
+      </p>
 
-<!-- PROJECTS -->
-<section id="projects" class="py-24 px-4">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">Projects</h2>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="card overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
-             class="h-40 w-full object-cover">
-        <div class="p-5 space-y-2">
-          <h3 class="font-bold">SaaS Dashboard</h3>
-          <p class="text-sm text-muted">Analytics & admin panel</p>
+      <!-- INFO GRID -->
+      <div class="grid grid-cols-2 gap-4 pt-4">
+        <div class="card p-4">
+          <p class="text-xs text-muted">Age</p>
+          <p class="font-bold">20+</p>
+        </div>
+        <div class="card p-4">
+          <p class="text-xs text-muted">Education</p>
+          <p class="font-bold">HSC (Running)</p>
+        </div>
+        <div class="card p-4">
+          <p class="text-xs text-muted">Device</p>
+          <p class="font-bold">Mobile Phone</p>
+        </div>
+        <div class="card p-4">
+          <p class="text-xs text-muted">Location</p>
+          <p class="font-bold">Bangladesh</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- PRICING -->
-<section id="pricing" class="py-24 px-4 bg-muted/30">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-5xl font-black mb-12">Pricing</h2>
+    <!-- SIDE CARD -->
+    <div class="card p-8 space-y-4">
+      <h3 class="font-bold text-xl">Developer Info</h3>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold">Basic</h3>
-        <div class="text-4xl font-black">$199</div>
-        <p class="text-sm text-muted">Landing page</p>
-      </div>
-
-      <div class="card p-8 space-y-4 border-blue-500">
-        <h3 class="font-bold">Pro</h3>
-        <div class="text-4xl font-black">$499</div>
-        <p class="text-sm text-muted">Multi-page site</p>
-      </div>
-
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold">Custom</h3>
-        <div class="text-4xl font-black">$899+</div>
-        <p class="text-sm text-muted">Full system</p>
-      </div>
+      <ul class="text-sm text-muted space-y-3">
+        <li>✔ Frontend & Backend Developer</li>
+        <li>✔ Mobile-first UI/UX</li>
+        <li>✔ HTML, CSS, Tailwind, JS</li>
+        <li>✔ PHP, MySQL, WordPress</li>
+        <li>✔ Freelance & Personal Projects</li>
+      </ul>
     </div>
+
   </div>
 </section>
 
-<!-- MORE SECTION -->
-<section id="more" class="py-24 px-4 border-t border-border">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black mb-12 text-center">
-      More About My Work
-    </h2>
+<!-- SKILLS -->
+<section id="skills" class="py-24 px-4">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="text-3xl sm:text-5xl font-black mb-10">Skills</h2>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold text-xl">Skills</h3>
-        <ul class="text-sm text-muted space-y-2">
-          <li>✔ HTML, CSS, Tailwind</li>
-          <li>✔ JavaScript, React</li>
-          <li>✔ PHP, MySQL</li>
-          <li>✔ UI/UX & Performance</li>
-        </ul>
-      </div>
-
-      <div class="card p-8 space-y-4">
-        <h3 class="font-bold text-xl">Services</h3>
-        <ul class="text-sm text-muted space-y-2">
-          <li>✔ Portfolio & Business Websites</li>
-          <li>✔ SaaS & Dashboard UI</li>
-          <li>✔ Landing Pages</li>
-          <li>✔ Custom Web Apps</li>
-        </ul>
-      </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      <span class="border border-border px-4 py-2 rounded-full text-sm">HTML</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">CSS</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">Tailwind CSS</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">JavaScript</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">PHP</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">MySQL</span>
+      <span class="border border-border px-4 py-2 rounded-full text-sm">WordPress</span>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="py-24 px-4">
+<section id="contact" class="py-24 px-4 border-t border-border">
   <div class="max-w-xl mx-auto text-center space-y-6">
     <h2 class="text-4xl font-black">Contact Me</h2>
 
-    <form class="card p-6 space-y-4 text-left">
-      <input class="w-full p-3 bg-muted border border-border rounded" placeholder="Name">
-      <input class="w-full p-3 bg-muted border border-border rounded" placeholder="Email">
-      <textarea class="w-full p-3 bg-muted border border-border rounded" rows="4"
-                placeholder="Your project"></textarea>
-      <button class="w-full bg-primary py-3 rounded font-bold">Send Message</button>
+    <form class="card p-6 space-y-4">
+      <input class="w-full p-3 bg-transparent border border-border rounded" placeholder="Your Name">
+      <input class="w-full p-3 bg-transparent border border-border rounded" placeholder="Email">
+      <textarea rows="4" class="w-full p-3 bg-transparent border border-border rounded"
+        placeholder="Your message"></textarea>
+
+      <button class="w-full bg-primary py-3 rounded-xl font-bold">
+        Send Message
+      </button>
     </form>
   </div>
 </section>
 
 <footer class="py-8 text-center text-xs text-muted border-t border-border">
-  © 2026 Piash Jodder
+  © 2026 Piash Jodder. All Rights Reserved.
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   lucide.createIcons();
-  AOS.init({ once: true });
 </script>
 
 </body>
