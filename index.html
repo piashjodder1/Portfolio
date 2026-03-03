@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Piash Jodder | Premium SaaS & Web Developer</title>
+  <meta name="description" content="Piash Jodder - Full-Stack Developer & SaaS UI Specialist building high-performance digital products." />
+  <meta name="keywords" content="Piash Jodder, Full-Stack Developer, SaaS UI Specialist, React, Next.js, Laravel, Freelancer" />
+  <meta name="author" content="Piash Jodder" />
+  
+  <title>Piash Jodder | Premium Full-Stack Developer & SaaS UI Specialist</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -14,24 +18,36 @@
       darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
           colors: {
-            border: "hsl(263, 30%, 15%)",
-            background: "hsl(263, 40%, 2%)",
-            foreground: "hsl(210, 20%, 98%)",
-            primary: "hsl(263, 70%, 50%)",
-            card: "hsl(263, 40%, 4%)",
-            fiverr: "#1dbf73"
+            background: "#05030A",
+            foreground: "#F8F9FA",
+            card: "#0A0713",
+            cardHover: "#110D1D",
+            border: "rgba(255, 255, 255, 0.08)",
+            primary: {
+              DEFAULT: "#8B5CF6",
+              dark: "#7C3AED",
+              light: "#A78BFA"
+            },
+            muted: "#A1A1AA",
           },
           animation: {
-            blob: "blob 7s infinite",
-            'pulse-slow': "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            'blob': 'blob 7s infinite',
+            'scrolling': 'scroll 20s linear infinite',
           },
           keyframes: {
             blob: {
-              "0%": { transform: "translate(0px, 0px) scale(1)" },
-              "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-              "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-              "100%": { transform: "translate(0px, 0px) scale(1)" }
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            scroll: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
             }
           }
         }
@@ -40,605 +56,741 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: hsl(263, 40%, 2%);
-      color: hsl(210, 20%, 98%);
+      background-color: theme('colors.background');
+      color: theme('colors.foreground');
       overflow-x: hidden;
-      width: 100%;
-    }
-
-    /* Scroll Progress Bar */
-    #scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, hsl(263, 70%, 50%), #a855f7);
-      z-index: 100;
-      width: 0%;
-      transition: width 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      -webkit-font-smoothing: antialiased;
     }
 
     .glass {
-      background: rgba(15, 10, 25, 0.4);
+      background: rgba(10, 7, 19, 0.6);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid theme('colors.border');
     }
     
     .glass-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+      background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      border: 1px solid theme('colors.border');
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
 
     .text-gradient {
-      background: linear-gradient(to right, #fff, #a855f7);
+      background: linear-gradient(to right, #ffffff, #A78BFA);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
+    }
+
+    .bg-grid-pattern {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Typing Animation Cursor */
-    .typing-cursor::after {
-      content: '|';
-      animation: blink 1s step-start infinite;
-      color: hsl(263, 70%, 50%);
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* FAQ Accordion Details */
-    details > summary { list-style: none; }
-    details > summary::-webkit-details-marker { display: none; }
-    details[open] summary ~ * { animation: sweep .3s ease-in-out; }
-    @keyframes sweep {
-      0%    {opacity: 0; transform: translateY(-10px)}
-      100%  {opacity: 1; transform: translateY(0)}
+    /* Timeline visual */
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: theme('colors.primary.DEFAULT');
+      border-radius: 50%;
+      border: 3px solid theme('colors.background');
+      box-shadow: 0 0 0 2px theme('colors.primary.DEFAULT');
     }
     
-    /* Page Transition Overlay */
-    .page-transition {
-      position: fixed;
-      inset: 0;
-      background: hsl(263, 40%, 2%);
-      z-index: 9999;
-      pointer-events: none;
-      transition: opacity 0.8s ease-in-out;
+    @media (max-width: 768px) {
+      .timeline-dot::before { left: -1.85rem; }
     }
   </style>
 </head>
 
-<body class="selection:bg-primary/30 antialiased">
+<body class="selection:bg-primary/30 relative">
 
-<div class="page-transition" id="page-transition"></div>
-<div id="scroll-progress"></div>
+<div class="fixed inset-0 z-[-1] bg-grid-pattern"></div>
+<div class="fixed top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob z-[-1]"></div>
+<div class="fixed top-1/3 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob animation-delay-2000 z-[-1]"></div>
 
-<div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full mix-blend-screen filter blur-[120px] animate-blob z-[-1] pointer-events-none"></div>
-<div class="fixed top-[20%] right-[-10%] w-[400px] h-[400px] bg-fiverr/10 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000 z-[-1] pointer-events-none"></div>
-<div class="fixed bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-purple-900/20 rounded-full mix-blend-screen filter blur-[150px] animate-blob animation-delay-4000 z-[-1] pointer-events-none"></div>
-
-<a href="#contact" class="fixed bottom-24 md:bottom-8 right-6 z-50 glass px-6 py-3 rounded-full border-primary/30 text-primary font-bold shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:scale-105 transition-all duration-300 flex items-center gap-2 group">
-  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-  Available to Hire
-  <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-</a>
-
-<nav class="fixed top-0 w-full z-40 border-b border-white/5 glass transition-all duration-300" id="navbar">
-  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
-    <div class="text-xl font-black tracking-tighter flex items-center gap-2">
-      <div class="w-8 h-8 bg-gradient-to-br from-primary to-purple-800 rounded-lg shadow-lg shadow-primary/20 flex items-center justify-center text-white text-sm">P</div>
+<nav class="fixed top-0 w-full z-50 border-b border-border bg-background/70 backdrop-blur-xl transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="text-xl font-extrabold tracking-tighter flex items-center gap-3">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm shadow-[0_0_15px_rgba(139,92,246,0.5)]">P</div>
       <span>PIASH<span class="text-primary">.</span></span>
     </div>
-    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/70">
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
       <a href="#services" class="hover:text-white transition-colors">Services</a>
-      <a href="#portfolio" class="hover:text-white transition-colors">Work</a>
-      <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
-      <a href="#contact" class="bg-primary/10 text-primary px-5 py-2.5 rounded-full border border-primary/20 hover:bg-primary hover:text-white transition-all">Let's Talk</a>
+      <a href="#work" class="hover:text-white transition-colors">Work</a>
+      <a href="#process" class="hover:text-white transition-colors">Process</a>
+      <a href="#about" class="hover:text-white transition-colors">About</a>
     </div>
+    <a href="#contact" class="hidden md:flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-2.5 rounded-full hover:scale-105 transition-transform">
+      Start a Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </a>
   </div>
 </nav>
 
 <div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
-  <div class="glass rounded-2xl flex items-center justify-around p-3 shadow-2xl border-white/10">
-    <a href="#services" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary"><i data-lucide="layers" class="w-5 h-5"></i></a>
-    <a href="#portfolio" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary"><i data-lucide="layout-grid" class="w-5 h-5"></i></a>
-    <a href="#fiverr" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary"><i data-lucide="shopping-bag" class="w-5 h-5"></i></a>
-    <a href="#reviews" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary"><i data-lucide="star" class="w-5 h-5"></i></a>
-    <a href="#contact" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+  <div class="glass rounded-2xl flex items-center justify-around p-4 shadow-2xl border-white/10">
+    <a href="#services" class="text-muted hover:text-primary transition-colors"><i data-lucide="layers" class="w-6 h-6"></i></a>
+    <a href="#work" class="text-muted hover:text-primary transition-colors"><i data-lucide="layout-grid" class="w-6 h-6"></i></a>
+    <a href="#about" class="text-muted hover:text-primary transition-colors"><i data-lucide="user" class="w-6 h-6"></i></a>
+    <a href="#contact" class="text-muted hover:text-primary transition-colors"><i data-lucide="message-square" class="w-6 h-6"></i></a>
   </div>
 </div>
 
-<section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 text-center">
-  <div class="space-y-6 max-w-4xl mx-auto z-10" data-aos="fade-up">
-    <a href="#fiverr" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 text-xs font-semibold hover:border-fiverr/50 transition-colors cursor-pointer group">
-      <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-fiverr opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-fiverr"></span></span>
-      Top Rated Seller on Fiverr <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform text-fiverr"></i>
-    </a>
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center">
+  <div class="space-y-8 max-w-4xl mx-auto w-full relative z-10" data-aos="fade-up">
     
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] pb-2 text-gradient">
-      I build high-end <br/>
-      <span class="text-primary typing-cursor" id="typewriter"></span>
+    <div class="flex flex-wrap justify-center gap-3 mb-6">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold text-primary tracking-wide">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        Available for New Projects
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/50 text-xs font-semibold text-muted">
+        <i data-lucide="award" class="w-3.5 h-3.5 text-yellow-500"></i> Top 1% Freelancer
+      </div>
+    </div>
+
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05]">
+      Full-Stack Developer & <br class="hidden md:block"/>
+      <span class="text-gradient">SaaS UI Specialist.</span>
     </h1>
     
-    <p class="text-base md:text-xl text-foreground/60 max-w-2xl mx-auto font-medium leading-relaxed">
-      Transforming complex ideas into sleek, scalable, and high-converting digital products. Tailored for modern SaaS and enterprise brands.
+    <p class="text-base md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
+      I architect and develop high-performance digital products, complex SaaS dashboards, and conversion-optimized web applications that drive real business growth.
     </p>
-    
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-      <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-xl font-bold hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
-        View Portfolio <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+    <div class="flex flex-wrap justify-center gap-3 pt-2">
+      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="terminal" class="w-3 h-3"></i> Next.js</span>
+      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="atom" class="w-3 h-3"></i> React</span>
+      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="database" class="w-3 h-3"></i> Laravel</span>
+      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="wind" class="w-3 h-3"></i> Tailwind CSS</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+      <a href="#work" class="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+        View Selected Work
       </a>
-      <a href="#contact" class="w-full sm:w-auto px-8 py-4 glass glass-card rounded-xl font-bold hover:bg-white/5 active:scale-95 transition-all flex items-center justify-center gap-2">
-        Book a Call <i data-lucide="calendar" class="w-4 h-4"></i>
+      <a href="#contact" class="w-full sm:w-auto px-8 py-4 glass hover:bg-white/5 rounded-xl font-bold transition-all border-white/10 flex items-center justify-center gap-2">
+        Book a Discovery Call <i data-lucide="arrow-up-right" class="w-4 h-4 text-primary"></i>
       </a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-16 max-w-3xl mx-auto border-t border-border mt-12">
+      <div class="text-left">
+        <h4 class="text-3xl font-black text-white">5+</h4>
+        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Years Experience</p>
+      </div>
+      <div class="text-left">
+        <h4 class="text-3xl font-black text-white">50+</h4>
+        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Projects Delivered</p>
+      </div>
+      <div class="text-left">
+        <h4 class="text-3xl font-black text-white">100%</h4>
+        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Client Satisfaction</p>
+      </div>
+      <div class="text-left">
+        <h4 class="text-3xl font-black text-white">&lt;0.5s</h4>
+        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Avg Load Time</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="py-10 border-y border-white/5 bg-black/20" data-aos="fade-up">
-  <div class="max-w-7xl mx-auto px-6">
-    <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/40 mb-8">Trusted by innovative companies</p>
-    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-      <svg class="h-6 md:h-8 text-white" viewBox="0 0 100 30" fill="currentColor"><path d="M10 20h20v5H10zM10 5h5v20h-5zM35 5h20v5H35zM42.5 10h5v15h-5zM70 5h5v20h-5zM80 5h20v5H80zM80 12.5h15v5H80z"/></svg>
-      <svg class="h-6 md:h-8 text-white" viewBox="0 0 100 30" fill="currentColor"><circle cx="15" cy="15" r="10"/><path d="M35 5h5v20h-5zM50 5h15v5H50zM50 12.5h10v5H50zM50 20h15v5H50zM80 5h5v20h-5zM80 5l15 20h-5L80 10z"/></svg>
-      <svg class="h-6 md:h-8 text-white" viewBox="0 0 100 30" fill="currentColor"><path d="M10 5l10 20 10-20h-5l-5 10-5-10zM40 5h20v5H40zM47.5 10h5v15h-5zM75 5h5v20h-5zM75 5l15 20h-5L75 10z"/></svg>
-      <svg class="h-6 md:h-8 text-white hidden md:block" viewBox="0 0 100 30" fill="currentColor"><path d="M10 5h5v15h15v5H10zM40 5h20v5H40zM40 12.5h15v5H40zM40 20h20v5H40zM80 5h5v20h-5zM80 5l15 20h-5L80 10z"/></svg>
+<section class="py-10 border-y border-border/50 bg-card/30 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+    <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-6">Trusted by innovative companies worldwide</p>
+    <div class="relative w-full flex overflow-hidden mask-image-gradient">
+      <div class="flex w-[200%] animate-scrolling gap-12 md:gap-24 items-center">
+        <div class="flex gap-12 md:gap-24 items-center justify-around w-1/2 opacity-40 grayscale">
+          <h3 class="text-xl font-bold font-serif">ACME Corp</h3>
+          <h3 class="text-xl font-black tracking-tighter">GLOBAL<span class="text-primary">TECH</span></h3>
+          <h3 class="text-xl font-semibold italic">Nexus Innovations</h3>
+          <h3 class="text-xl font-black uppercase tracking-widest">Quantum</h3>
+          <h3 class="text-xl font-bold">Stellar.io</h3>
+        </div>
+        <div class="flex gap-12 md:gap-24 items-center justify-around w-1/2 opacity-40 grayscale">
+          <h3 class="text-xl font-bold font-serif">ACME Corp</h3>
+          <h3 class="text-xl font-black tracking-tighter">GLOBAL<span class="text-primary">TECH</span></h3>
+          <h3 class="text-xl font-semibold italic">Nexus Innovations</h3>
+          <h3 class="text-xl font-black uppercase tracking-widest">Quantum</h3>
+          <h3 class="text-xl font-bold">Stellar.io</h3>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="services" class="py-32 px-6 max-w-7xl mx-auto">
-  <div class="mb-20 text-center" data-aos="fade-up">
-    <span class="text-primary font-bold text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full border border-primary/20">Offerings</span>
-    <h2 class="text-4xl md:text-5xl font-bold mt-6">End-to-end <span class="text-gradient">Solutions</span></h2>
+  <div class="mb-20 md:flex justify-between items-end" data-aos="fade-up">
+    <div class="max-w-2xl">
+      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
+        <span class="w-8 h-px bg-primary"></span> Core Competencies
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Engineering Solutions That <span class="text-primary">Scale.</span></h2>
+    </div>
+    <p class="text-muted mt-6 md:mt-0 max-w-sm md:text-right">Moving beyond generic templates to build custom, high-end architectures tailored for your business metrics.</p>
   </div>
 
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="glass glass-card p-10 rounded-[2rem] group hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
-      <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-purple-900/40 rounded-2xl flex items-center justify-center text-primary mb-8 border border-primary/20 group-hover:scale-110 group-hover:from-primary group-hover:to-purple-600 group-hover:text-white transition-all duration-500 shadow-lg">
-        <i data-lucide="code-2" class="w-8 h-8"></i>
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+        <i data-lucide="layers" class="w-6 h-6"></i>
       </div>
-      <h3 class="text-2xl font-bold mb-4">Web Development</h3>
-      <p class="text-base text-foreground/60 leading-relaxed mb-8">Building fast, scalable, and secure web applications tailored for SaaS and modern enterprises.</p>
-      <ul class="space-y-3 text-sm text-foreground/70 font-medium">
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> React & Next.js</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Custom Dashboards</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> API Architecture</li>
+      <h3 class="text-2xl font-bold mb-4">High-Performance SaaS Platforms</h3>
+      <p class="text-muted leading-relaxed mb-8">End-to-end development of robust SaaS applications with complex dashboards, multi-tenant architectures, and API integrations.</p>
+      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Scalable Backend Architecture</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Secure User Authentication</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Payment Gateway Setup</li>
       </ul>
+      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
+        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
     </div>
 
-    <div class="glass glass-card p-10 rounded-[2rem] group hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-      <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-purple-900/40 rounded-2xl flex items-center justify-center text-primary mb-8 border border-primary/20 group-hover:scale-110 group-hover:from-primary group-hover:to-purple-600 group-hover:text-white transition-all duration-500 shadow-lg">
-        <i data-lucide="layout" class="w-8 h-8"></i>
+    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+        <i data-lucide="mouse-pointer-click" class="w-6 h-6"></i>
       </div>
-      <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
-      <p class="text-base text-foreground/60 leading-relaxed mb-8">Crafting pixel-perfect, premium interfaces that focus on conversion and user retention.</p>
-      <ul class="space-y-3 text-sm text-foreground/70 font-medium">
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Figma Prototyping</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Design Systems</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Wireframing</li>
+      <h3 class="text-2xl font-bold mb-4">Conversion-Focused UI/UX</h3>
+      <p class="text-muted leading-relaxed mb-8">Designing pixel-perfect, accessible, and intuitive interfaces utilizing modern design systems like shadcn/ui to maximize user retention.</p>
+      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Premium Dark/Light Modes</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Micro-interactions & Animations</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Responsive Mobile-First Design</li>
       </ul>
+      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
+        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
     </div>
 
-    <div class="glass glass-card p-10 rounded-[2rem] group hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-      <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-purple-900/40 rounded-2xl flex items-center justify-center text-primary mb-8 border border-primary/20 group-hover:scale-110 group-hover:from-primary group-hover:to-purple-600 group-hover:text-white transition-all duration-500 shadow-lg">
-        <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
       </div>
-      <h3 class="text-2xl font-bold mb-4">E-commerce</h3>
-      <p class="text-base text-foreground/60 leading-relaxed mb-8">Developing high-converting storefronts engineered for speed, SEO, and massive scale.</p>
-      <ul class="space-y-3 text-sm text-foreground/70 font-medium">
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Headless Commerce</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Payment Gateways</li>
-        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> CMS Integration</li>
+      <h3 class="text-2xl font-bold mb-4">Scalable E-Commerce Systems</h3>
+      <p class="text-muted leading-relaxed mb-8">Building lightning-fast, high-converting digital storefronts tailored to handle high traffic and complex product inventories.</p>
+      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Custom Headless Commerce</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Inventory Management APIs</li>
+        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Optimized Checkout Flows</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="glass glass-card rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row group" data-aos="zoom-in">
-      <div class="lg:w-1/2 p-10 md:p-16 flex flex-col justify-center">
-        <span class="inline-block px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-bold tracking-widest uppercase mb-6 w-max">Featured Project</span>
-        <h3 class="text-3xl md:text-5xl font-bold mb-6">Fintech Analytics Dashboard</h3>
-        <p class="text-foreground/60 text-lg mb-8 leading-relaxed">A modern SaaS platform designed to track financial metrics in real-time. Built with Next.js, Tailwind CSS, and sophisticated charting libraries.</p>
-        <div class="flex flex-wrap gap-2 mb-10">
-          <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-medium">Next.js</span>
-          <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-medium">TypeScript</span>
-          <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-medium">shadcn/ui</span>
-        </div>
-        <a href="#" class="inline-flex items-center gap-2 font-bold hover:text-primary transition-colors w-max group/btn">
-          Read Case Study <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
-        </a>
-      </div>
-      <div class="lg:w-1/2 bg-muted relative overflow-hidden min-h-[300px]">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" alt="Dashboard Preview">
-        <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent lg:hidden"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="py-24 px-6 max-w-7xl mx-auto">
-  <div class="grid md:grid-cols-2 gap-16 items-center">
-    <div data-aos="fade-right">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Mastery in modern <span class="text-gradient">stack</span></h2>
-      <p class="text-lg text-foreground/60 mb-8 leading-relaxed">
-        I combine robust engineering with stunning design. Leveraging the latest frameworks to deliver lightning-fast, accessible, and scalable applications.
-      </p>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="glass glass-card p-6 rounded-2xl border-l-4 border-l-primary">
-          <div class="text-3xl font-black text-white mb-1">5yr+</div>
-          <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold">Experience</p>
-        </div>
-        <div class="glass glass-card p-6 rounded-2xl border-l-4 border-l-fiverr">
-          <div class="text-3xl font-black text-white mb-1">100+</div>
-          <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold">Projects Done</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="space-y-8 progress-container" data-aos="fade-left">
-      <div class="space-y-3">
-        <div class="flex justify-between text-sm font-bold tracking-wide">
-          <span>Frontend (React, Next.js, Tailwind)</span>
-          <span class="text-primary">95%</span>
-        </div>
-        <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
-          <div class="h-full bg-gradient-to-r from-primary to-purple-400 rounded-full w-0 transition-all duration-1000 ease-out skill-bar" data-width="95%"></div>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between text-sm font-bold tracking-wide">
-          <span>Backend (Node.js, Laravel, Databases)</span>
-          <span class="text-primary">85%</span>
-        </div>
-        <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
-          <div class="h-full bg-gradient-to-r from-primary to-purple-400 rounded-full w-0 transition-all duration-1000 ease-out skill-bar delay-100" data-width="85%"></div>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="flex justify-between text-sm font-bold tracking-wide">
-          <span>UI/UX & Prototyping (Figma)</span>
-          <span class="text-primary">90%</span>
-        </div>
-        <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
-          <div class="h-full bg-gradient-to-r from-primary to-purple-400 rounded-full w-0 transition-all duration-1000 ease-out skill-bar delay-200" data-width="90%"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pricing" class="py-24 px-6 max-w-7xl mx-auto">
-  <div class="mb-20 text-center" data-aos="fade-up">
-    <span class="text-primary font-bold text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full border border-primary/20">Investment</span>
-    <h2 class="text-4xl md:text-5xl font-bold mt-6">Transparent <span class="text-gradient">Pricing</span></h2>
-  </div>
-
-  <div class="grid md:grid-cols-3 gap-8 items-center">
-    <div class="glass glass-card p-10 rounded-[2.5rem] flex flex-col group hover:border-white/20 transition-all duration-500 h-full" data-aos="fade-up">
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold mb-2">Landing Page</h3>
-        <p class="text-sm text-foreground/50">Perfect for individuals</p>
-      </div>
-      <div class="mb-8 pb-8 border-b border-white/10">
-        <span class="text-4xl font-black text-white">$499</span>
-        <span class="text-foreground/40 text-sm">/project</span>
-      </div>
-      <ul class="space-y-5 mb-10 flex-grow text-sm text-foreground/80 font-medium">
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> High-converting single page</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Responsive Tailwind CSS</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Basic SEO Setup</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> 1 Week Delivery</li>
-      </ul>
-      <a href="#contact" class="w-full py-4 text-center glass rounded-xl font-bold hover:bg-white hover:text-black transition-all">Get Started</a>
-    </div>
-
-    <div class="glass glass-card p-10 rounded-[2.5rem] flex flex-col border-primary/50 relative md:-translate-y-4 shadow-[0_0_40px_rgba(124,58,237,0.15)] h-full z-10 bg-primary/5" data-aos="fade-up" data-aos-delay="100">
-      <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-purple-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Most Popular</div>
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold mb-2 text-primary">SaaS App UI/UX</h3>
-        <p class="text-sm text-foreground/50">Perfect for startups</p>
-      </div>
-      <div class="mb-8 pb-8 border-b border-white/10">
-        <span class="text-5xl font-black text-white">$1,499</span>
-        <span class="text-foreground/40 text-sm">/project</span>
-      </div>
-      <ul class="space-y-5 mb-10 flex-grow text-sm text-foreground/80 font-medium">
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Up to 10 Dashboard Views</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Custom Design System</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Interactive Prototypes</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Next.js Integration Ready</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Priority Support</li>
-      </ul>
-      <a href="#contact" class="w-full py-4 text-center bg-white text-black rounded-xl font-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl">Select Plan</a>
-    </div>
-
-    <div class="glass glass-card p-10 rounded-[2.5rem] flex flex-col group hover:border-white/20 transition-all duration-500 h-full" data-aos="fade-up" data-aos-delay="200">
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold mb-2">Full-Stack Platform</h3>
-        <p class="text-sm text-foreground/50">Perfect for enterprise</p>
-      </div>
-      <div class="mb-8 pb-8 border-b border-white/10">
-        <span class="text-3xl font-black text-white italic">Custom Price</span>
-      </div>
-      <ul class="space-y-5 mb-10 flex-grow text-sm text-foreground/80 font-medium">
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Complete Front & Back End</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Database Architecture</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Payment & API Integrations</li>
-        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-primary shrink-0"></i> Advanced Security Auth</li>
-      </ul>
-      <a href="#contact" class="w-full py-4 text-center glass rounded-xl font-bold hover:bg-white hover:text-black transition-all">Contact Me</a>
-    </div>
-  </div>
-</section>
-
-<section id="fiverr" class="py-20 px-6">
-  <div class="max-w-6xl mx-auto glass glass-card border border-fiverr/30 rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative shadow-[0_0_50px_rgba(29,191,115,0.1)]">
-    <div class="absolute inset-0 bg-gradient-to-r from-fiverr/5 to-transparent pointer-events-none"></div>
-    
-    <div class="space-y-6 md:w-1/2 relative z-10 text-center md:text-left">
-      <div class="inline-flex items-center gap-2 bg-fiverr/20 text-fiverr px-4 py-1.5 rounded-full text-xs font-bold border border-fiverr/30">
-        <i data-lucide="shield-check" class="w-4 h-4"></i> Secure Escrow Payment
-      </div>
-      <h2 class="text-4xl md:text-5xl font-black text-white">Hire me directly on <span class="text-fiverr">Fiverr</span></h2>
-      <p class="text-lg text-foreground/70">Prefer marketplace protection? Work with me on Fiverr for strict deadlines, guaranteed quality, and milestone-based payments.</p>
-      
-      <div class="flex items-center justify-center md:justify-start gap-2 text-yellow-500 font-bold text-xl pt-2">
-        5.0 <div class="flex"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div> <span class="text-foreground/50 text-sm ml-2 font-normal">(120+ Reviews)</span>
-      </div>
-    </div>
-    
-    <div class="md:w-auto relative z-10">
-      <a href="#" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-fiverr text-white rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_rgba(29,191,115,0.3)]">
-        View Fiverr Gigs <i data-lucide="external-link" class="w-5 h-5"></i>
+      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
+        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </a>
     </div>
   </div>
 </section>
 
-<section id="reviews" class="py-24 px-6 overflow-hidden">
+<section class="py-20 px-6 bg-card/40 border-y border-border">
+  <div class="max-w-7xl mx-auto" data-aos="fade-up">
+    <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
+      <span class="w-8 h-px bg-primary"></span> Featured Case Study
+    </span>
+    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-12">Evalura - Assessment SaaS</h2>
+    
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="relative rounded-3xl overflow-hidden border border-border group">
+        <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1470&auto=format&fit=crop" alt="SaaS Dashboard Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+      </div>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Project Overview</h3>
+          <p class="text-muted leading-relaxed">A comprehensive, dynamic web application designed for generating and managing complex MCQ assessment papers. Built with a premium, modern admin panel aesthetic to serve educational institutions.</p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="glass p-5 rounded-2xl border-l-2 border-l-primary">
+            <h4 class="font-bold text-white mb-2">The Challenge</h4>
+            <p class="text-sm text-muted">Client needed a secure, lightning-fast platform capable of handling vast question banks with PDF export capabilities, while maintaining a clean, premium UX.</p>
+          </div>
+          <div class="glass p-5 rounded-2xl border-l-2 border-l-primary">
+            <h4 class="font-bold text-white mb-2">The Solution</h4>
+            <p class="text-sm text-muted">Architected a Next.js frontend with Tailwind CSS (shadcn/ui style) connected to a robust Laravel backend, implementing custom PDF generation logic.</p>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider">Tech Stack Used</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Next.js</span>
+            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">React</span>
+            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Tailwind CSS</span>
+            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Laravel PHP</span>
+            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">MySQL</span>
+          </div>
+        </div>
+        
+        <div class="pt-4 flex gap-4">
+          <button class="px-6 py-3 bg-white text-black rounded-xl font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
+            Live Preview <i data-lucide="external-link" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="py-32 px-6 max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-up">
+    <div>
+      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
+        <span class="w-8 h-px bg-primary"></span> Selected Portfolio
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Recent <span class="text-primary">Masterpieces.</span></h2>
+    </div>
+    
+    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+      <button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-bold whitespace-nowrap">All Work</button>
+      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">SaaS Dashboards</button>
+      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">E-Commerce</button>
+      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">Web Apps</button>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="group cursor-pointer" data-aos="fade-up">
+      <div class="overflow-hidden rounded-3xl border border-border bg-card aspect-[4/3] relative mb-6">
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1474&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" alt="Map App">
+        <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+          <button class="px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            View Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">GeoLet Property Map</h3>
+          <p class="text-muted text-sm">Interactive map-based real estate platform with complex filtering and routing.</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">Web App</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+      <div class="overflow-hidden rounded-3xl border border-border bg-card aspect-[4/3] relative mb-6">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" alt="Fintech">
+        <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+          <button class="px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            View Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">FinDash Analytics</h3>
+          <p class="text-muted text-sm">High-end financial dashboard with real-time data visualization and secure auth.</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">SaaS Dashboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="py-24 px-6 bg-card/20 border-t border-border">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Methodology</span>
+      <h2 class="text-4xl font-extrabold">A Proven Framework for <span class="text-primary">Success</span></h2>
+    </div>
+    
+    <div class="relative pl-8 md:pl-0">
+      <div class="absolute left-8 md:left-[50%] top-0 bottom-0 w-px bg-border md:-translate-x-1/2"></div>
+      
+      <div class="space-y-16">
+        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
+          <div class="md:w-[45%] md:text-right pr-8 order-2 md:order-1 mt-4 md:mt-0">
+            <h3 class="text-2xl font-bold mb-3">1. Strategic Discovery</h3>
+            <p class="text-muted text-sm leading-relaxed">We define your business goals, target audience, and technical requirements to create a robust product roadmap without guesswork.</p>
+          </div>
+          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
+          <div class="md:w-[45%] pl-8 order-1 md:order-2 opacity-50 text-6xl font-black text-transparent stroke-text" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">01</div>
+        </div>
+
+        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
+          <div class="md:w-[45%] pr-8 order-2 md:order-1 mt-4 md:mt-0 md:text-right md:hidden">
+            <h3 class="text-2xl font-bold mb-3">2. UI/UX Architecture</h3>
+            <p class="text-muted text-sm leading-relaxed">Crafting wireframes and high-fidelity prototypes using Figma, ensuring a premium, frictionless user experience before writing any code.</p>
+          </div>
+          <div class="md:w-[45%] md:text-right pr-8 order-1 md:order-1 hidden md:block opacity-50 text-6xl font-black text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">02</div>
+          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
+          <div class="md:w-[45%] pl-8 order-2 md:order-2 mt-4 md:mt-0 hidden md:block">
+            <h3 class="text-2xl font-bold mb-3">2. UI/UX Architecture</h3>
+            <p class="text-muted text-sm leading-relaxed">Crafting wireframes and high-fidelity prototypes using Figma, ensuring a premium, frictionless user experience before writing any code.</p>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
+          <div class="md:w-[45%] md:text-right pr-8 order-2 md:order-1 mt-4 md:mt-0">
+            <h3 class="text-2xl font-bold mb-3">3. Agile Development</h3>
+            <p class="text-muted text-sm leading-relaxed">Building secure, scalable code architectures using modern stacks (Next.js, Laravel). Continuous deployment allows you to track progress in real-time.</p>
+          </div>
+          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
+          <div class="md:w-[45%] pl-8 order-1 md:order-2 opacity-50 text-6xl font-black text-transparent stroke-text" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">03</div>
+        </div>
+
+        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
+          <div class="md:w-[45%] pr-8 order-2 md:order-1 mt-4 md:mt-0 md:text-right md:hidden">
+            <h3 class="text-2xl font-bold mb-3">4. Launch & Scale</h3>
+            <p class="text-muted text-sm leading-relaxed">Rigorous QA testing, performance optimization, and secure deployment to production servers, followed by ongoing technical support.</p>
+          </div>
+          <div class="md:w-[45%] md:text-right pr-8 order-1 md:order-1 hidden md:block opacity-50 text-6xl font-black text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">04</div>
+          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
+          <div class="md:w-[45%] pl-8 order-2 md:order-2 mt-4 md:mt-0 hidden md:block">
+            <h3 class="text-2xl font-bold mb-3">4. Launch & Scale</h3>
+            <p class="text-muted text-sm leading-relaxed">Rigorous QA testing, performance optimization, and secure deployment to production servers, followed by ongoing technical support.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-32 px-6 max-w-7xl mx-auto border-t border-border">
+  <div class="grid lg:grid-cols-2 gap-16 items-center">
+    
+    <div data-aos="fade-right">
+      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
+        <span class="w-8 h-px bg-primary"></span> The Developer
+      </span>
+      <h2 class="text-4xl font-extrabold mb-6">I Build Digital Assets, <br/><span class="text-muted">Not Just Websites.</span></h2>
+      
+      <div class="space-y-4 text-muted leading-relaxed">
+        <p>I am Piash Jodder, a specialized Full-Stack Developer driven by a singular philosophy: <strong>Code should solve business problems.</strong></p>
+        <p>Over the past 5+ years, I've transitioned from building basic websites to architecting complex, data-driven SaaS platforms and scalable e-commerce systems for clients who demand excellence.</p>
+        <p>My unique edge lies in marrying robust backend logic (PHP/Laravel/MySQL) with premium, conversion-optimized frontend interfaces (Next.js/React/Tailwind). I don't just write code; I partner with you to engineer a product that elevates your brand and outpaces the competition.</p>
+      </div>
+
+      <div class="flex gap-4 mt-8">
+        <div class="glass px-4 py-3 rounded-xl border-l-2 border-l-primary flex-1">
+          <p class="text-xs text-muted uppercase tracking-wider mb-1">Code Quality</p>
+          <p class="font-bold">Enterprise Grade</p>
+        </div>
+        <div class="glass px-4 py-3 rounded-xl border-l-2 border-l-primary flex-1">
+          <p class="text-xs text-muted uppercase tracking-wider mb-1">Communication</p>
+          <p class="font-bold">Transparent & Direct</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6" data-aos="fade-left">
+      <div class="glass-card p-6 rounded-3xl">
+        <h4 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="layout-template" class="w-4 h-4 text-primary"></i> Frontend Engineering</h4>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1"><span>React / Next.js</span><span class="text-primary">95%</span></div>
+            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[95%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1"><span>Tailwind CSS / UI Libraries</span><span class="text-primary">98%</span></div>
+            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[98%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl">
+        <h4 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="server" class="w-4 h-4 text-primary"></i> Backend & Database</h4>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1"><span>PHP / Laravel</span><span class="text-primary">90%</span></div>
+            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[90%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1"><span>MySQL / API Design</span><span class="text-primary">92%</span></div>
+            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[92%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="glass-card p-5 rounded-2xl flex-1 flex flex-col justify-center items-center text-center">
+          <i data-lucide="figma" class="w-6 h-6 text-primary mb-2"></i>
+          <span class="text-sm font-bold">UI/UX Design</span>
+        </div>
+        <div class="glass-card p-5 rounded-2xl flex-1 flex flex-col justify-center items-center text-center">
+          <i data-lucide="git-branch" class="w-6 h-6 text-primary mb-2"></i>
+          <span class="text-sm font-bold">Git & DevOps</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="py-24 px-6 bg-card/20 border-y border-border">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16" data-aos="fade-up">
-      <h2 class="text-4xl font-bold">Client <span class="text-gradient">Feedback</span></h2>
+      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Investment</span>
+      <h2 class="text-4xl md:text-5xl font-extrabold">Transparent <span class="text-primary">Pricing.</span></h2>
+      <p class="text-muted mt-4 max-w-md mx-auto">High-ROI digital solutions structured for serious businesses.</p>
     </div>
-    
-    <div class="flex gap-6 overflow-x-auto pb-10 no-scrollbar snap-x snap-mandatory px-4 md:px-0">
-      <div class="min-w-[320px] md:min-w-[400px] snap-center glass glass-card p-8 rounded-[2rem] border-t-4 border-t-primary/50">
-        <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-base font-medium text-foreground/80 mb-8 leading-relaxed">"Piash delivered an incredibly polished SaaS dashboard ahead of schedule. The attention to detail in the UI components is unmatched. Worth every penny."</p>
-        <div class="flex items-center gap-4">
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full object-cover border border-white/20" alt="Client">
-          <div>
-            <p class="font-bold">Marcus T.</p>
-            <p class="text-xs text-primary">Founder, TechFlow</p>
-          </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 items-center">
+      
+      <div class="glass-card p-8 rounded-[2rem]" data-aos="fade-up">
+        <h3 class="text-xl font-bold mb-1">Standard Presence</h3>
+        <p class="text-sm text-muted mb-6">Best for personal brands & portfolios</p>
+        <div class="text-4xl font-black mb-6">$995<span class="text-sm text-muted font-normal">/project</span></div>
+        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 2-3 Weeks Delivery</div>
+          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> 2 Revisions</div>
+          <div class="w-full h-px bg-border my-4"></div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Custom Premium Design</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Fully Responsive (Mobile First)</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Basic SEO Setup</div>
         </div>
+        <a href="#contact" class="block w-full py-4 text-center glass rounded-xl font-bold hover:bg-white/5 transition-colors">Start Project</a>
       </div>
-      <div class="min-w-[320px] md:min-w-[400px] snap-center glass glass-card p-8 rounded-[2rem] border-t-4 border-t-fiverr/50">
-        <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-base font-medium text-foreground/80 mb-8 leading-relaxed">"Absolutely stellar communication and flawless execution. He took our rough wireframes and turned them into a stunning, responsive Next.js web app."</p>
-        <div class="flex items-center gap-4">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full object-cover border border-white/20" alt="Client">
-          <div>
-            <p class="font-bold">Sarah Jenkins</p>
-            <p class="text-xs text-fiverr">Product Manager</p>
-          </div>
+
+      <div class="glass-card p-10 rounded-[2.5rem] border-primary/50 relative shadow-[0_0_40px_rgba(139,92,246,0.15)] transform lg:-translate-y-4 bg-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Most Popular</div>
+        <h3 class="text-2xl font-bold mb-1">Dynamic Business</h3>
+        <p class="text-sm text-primary mb-6">Best for corporate & growing startups</p>
+        <div class="text-5xl font-black mb-6">$2,495<span class="text-sm text-muted font-normal">/project</span></div>
+        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 4-6 Weeks Delivery</div>
+          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Unlimited Revisions (Design phase)</div>
+          <div class="w-full h-px bg-border my-4"></div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Next.js / Laravel Architecture</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Custom Admin Panel / CMS</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Advanced Animations & Interactions</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Advanced Technical SEO</div>
         </div>
+        <a href="#contact" class="block w-full py-4 text-center bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-colors shadow-lg shadow-primary/25">Select Plan</a>
       </div>
-      <div class="min-w-[320px] md:min-w-[400px] snap-center glass glass-card p-8 rounded-[2rem] border-t-4 border-t-purple-500/50">
-        <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
-        <p class="text-base font-medium text-foreground/80 mb-8 leading-relaxed">"The best frontend developer I've hired. The subtle animations and glassmorphism effects he added made our portfolio look incredibly premium."</p>
-        <div class="flex items-center gap-4">
-          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full object-cover border border-white/20" alt="Client">
-          <div>
-            <p class="font-bold">David O.</p>
-            <p class="text-xs text-purple-400">Creative Director</p>
-          </div>
+
+      <div class="glass-card p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-xl font-bold mb-1">Enterprise SaaS</h3>
+        <p class="text-sm text-muted mb-6">Best for complex web applications</p>
+        <div class="text-4xl font-black mb-6">Custom</div>
+        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
+          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> Timeline: TBD</div>
+          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Continuous Support</div>
+          <div class="w-full h-px bg-border my-4"></div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Scalable Multi-tenant Architecture</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Complex API Integrations</div>
+          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Payment Gateway Infrastructure</div>
         </div>
+        <a href="#contact" class="block w-full py-4 text-center glass rounded-xl font-bold hover:bg-white/5 transition-colors">Request Quote</a>
       </div>
+
     </div>
   </div>
 </section>
 
-<section id="faq" class="py-24 px-6 max-w-4xl mx-auto">
+<section class="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
   <div class="text-center mb-16" data-aos="fade-up">
-    <h2 class="text-4xl font-bold mb-4">Frequently Asked <span class="text-gradient">Questions</span></h2>
+    <h2 class="text-3xl font-bold">Client <span class="text-primary">Endorsements</span></h2>
   </div>
-  <div class="space-y-4">
-    <details class="glass glass-card rounded-2xl group transition-all duration-300" open>
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
-        What is your tech stack?
-        <span class="transition-transform duration-300 group-open:rotate-180 bg-white/5 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-foreground/70 border-t border-white/5 pt-4 leading-relaxed">
-        My primary stack for front-end is React & Next.js styled with Tailwind CSS and Framer Motion for animations. For backend, I use Node.js or Laravel, depending on project needs, along with PostgreSQL or MySQL.
+  
+  <div class="flex gap-6 overflow-x-auto no-scrollbar pb-8 snap-x snap-mandatory">
+    <div class="min-w-[350px] md:min-w-[450px] snap-center glass-card p-8 rounded-3xl relative">
+      <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-border opacity-50"></i>
+      <div class="flex text-yellow-500 gap-1 mb-6">
+        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
       </div>
-    </details>
-    
-    <details class="glass glass-card rounded-2xl group transition-all duration-300">
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
-        Do you design the UI before coding?
-        <span class="transition-transform duration-300 group-open:rotate-180 bg-white/5 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-foreground/70 border-t border-white/5 pt-4 leading-relaxed">
-        Yes! I typically design high-fidelity mockups and interactive prototypes in Figma first. Once the design is approved, I proceed to pixel-perfect development.
+      <p class="text-muted leading-relaxed mb-8">"Piash didn't just write code; he architected a solution that completely transformed our assessment platform. The UI is incredibly slick, and the backend handles thousands of requests flawlessly. A true top-tier professional."</p>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-card rounded-full overflow-hidden border border-border">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <h4 class="font-bold text-sm">Marcus V.</h4>
+          <p class="text-xs text-primary font-semibold">SaaS Founder, United Kingdom</p>
+        </div>
       </div>
-    </details>
+    </div>
 
-    <details class="glass glass-card rounded-2xl group transition-all duration-300">
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
-        How long does a typical project take?
-        <span class="transition-transform duration-300 group-open:rotate-180 bg-white/5 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-foreground/70 border-t border-white/5 pt-4 leading-relaxed">
-        A landing page takes about 1-2 weeks. A complete Web App / SaaS dashboard can take anywhere from 4 to 8 weeks depending on the complexity and feature set.
+    <div class="min-w-[350px] md:min-w-[450px] snap-center glass-card p-8 rounded-3xl relative">
+      <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-border opacity-50"></i>
+      <div class="flex text-yellow-500 gap-1 mb-6">
+        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
       </div>
-    </details>
+      <p class="text-muted leading-relaxed mb-8">"We hired Piash for a complex map-based real estate portal. His expertise in Next.js and API integration saved us months of development time. The final product looks like a $50k agency build."</p>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-card rounded-full overflow-hidden border border-border">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <h4 class="font-bold text-sm">Sarah Jenkins</h4>
+          <p class="text-xs text-primary font-semibold">PropTech Director, USA</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="py-24 px-6 relative overflow-hidden" data-aos="zoom-in">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 pointer-events-none"></div>
-  <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10 glass glass-card p-12 md:p-24 rounded-[3rem] border border-primary/30 shadow-[0_0_100px_rgba(124,58,237,0.15)]">
-    <h2 class="text-5xl md:text-7xl font-black">Ready to <span class="text-gradient">Scale?</span></h2>
-    <p class="text-xl text-foreground/70 max-w-2xl mx-auto">Stop settling for average design. Let's build a digital experience that converts visitors into loyal customers.</p>
-    <div class="pt-6">
-      <a href="#contact" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-black rounded-full font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-white/10">
-        Start a Project <i data-lucide="rocket" class="w-5 h-5"></i>
+<section class="py-24 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 bg-primary/5"></div>
+  <div class="max-w-4xl mx-auto relative z-10 text-center glass-card p-12 md:p-20 rounded-[3rem] border-primary/20 shadow-[0_0_50px_rgba(139,92,246,0.1)]" data-aos="zoom-in">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Ready to Build Your Next <br/>High-Performance Product?</h2>
+    <p class="text-muted mb-10 max-w-xl mx-auto">Stop settling for mediocre templates. Let's engineer a custom solution that elevates your brand and drives measurable results.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#contact" class="px-8 py-4 bg-white text-black hover:bg-gray-200 rounded-xl font-bold transition-colors flex items-center justify-center gap-2">
+        Book a Discovery Call <i data-lucide="calendar" class="w-4 h-4"></i>
+      </a>
+      <a href="mailto:contact@piashjodder.com" class="px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-colors shadow-lg shadow-primary/25">
+        Email Directly
       </a>
     </div>
   </div>
 </section>
 
-<section id="contact" class="py-24 px-6 border-t border-white/5">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
-    <div class="space-y-8">
-      <h2 class="text-4xl md:text-5xl font-bold">Let's build something <span class="text-gradient">epic.</span></h2>
-      <p class="text-lg text-foreground/60">Fill out the form and I'll get back to you within 24 hours. Let's discuss your goals and how we can achieve them together.</p>
+<section class="py-24 px-6 max-w-3xl mx-auto">
+  <div class="text-center mb-16" data-aos="fade-up">
+    <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
+  </div>
+  
+  <div class="space-y-4">
+    <details class="glass-card rounded-2xl group transition-all duration-300">
+      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
+        What is your typical process for a new project?
+        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+      </summary>
+      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
+        My process is highly structured: Discovery Call -> Strategy & Proposal -> UI/UX Design (Figma) -> Client Approval -> Agile Development (Next.js/Laravel) -> QA Testing -> Launch & Support. I ensure complete transparency at every stage.
+      </div>
+    </details>
+
+    <details class="glass-card rounded-2xl group transition-all duration-300">
+      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
+        Do you only do frontend or full-stack?
+        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+      </summary>
+      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
+        I am a dedicated Full-Stack Developer. I handle everything from database architecture (MySQL, PostgreSQL) and server logic (PHP/Laravel) to premium frontend interfaces (React/Next.js). I build complete, production-ready systems.
+      </div>
+    </details>
+
+    <details class="glass-card rounded-2xl group transition-all duration-300">
+      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
+        How do you handle revisions?
+        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+      </summary>
+      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
+        During the UI/UX design phase, I offer extensive revisions to ensure the visual direction is perfect. Once the design is approved and development begins, technical revisions are scoped according to the project contract to ensure timely delivery.
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="contact" class="py-24 px-6 border-t border-border bg-card/30">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+    
+    <div data-aos="fade-right">
+      <h2 class="text-4xl font-extrabold mb-6">Let's Discuss Your <span class="text-primary">Vision.</span></h2>
+      <p class="text-muted mb-10 leading-relaxed">Fill out the form to outline your project requirements, or reach out directly via email or WhatsApp. I usually respond within 24 hours.</p>
       
-      <div class="space-y-6 pt-4">
-        <a href="mailto:hello@piash.com" class="flex items-center gap-4 p-4 glass rounded-2xl hover:border-primary/50 transition-colors w-max">
-          <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="mail" class="w-6 h-6"></i></div>
+      <div class="space-y-6">
+        <a href="mailto:hello@piashjodder.com" class="flex items-center gap-4 glass p-4 rounded-2xl hover:border-primary/50 transition-colors group">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </div>
           <div>
-            <p class="text-sm text-foreground/50 font-bold uppercase tracking-widest">Email Me</p>
-            <p class="font-bold">hello@piash.com</p>
+            <p class="text-xs text-muted uppercase tracking-wider font-bold">Email Me</p>
+            <p class="font-medium text-white">hello@piashjodder.com</p>
+          </div>
+        </a>
+        
+        <a href="#" class="flex items-center gap-4 glass p-4 rounded-2xl hover:border-green-500/50 transition-colors group">
+          <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-white transition-colors">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-muted uppercase tracking-wider font-bold">WhatsApp</p>
+            <p class="font-medium text-white">+880 1XXX XXXXXX</p>
           </div>
         </a>
       </div>
     </div>
-    
-    <form class="glass glass-card p-8 md:p-10 rounded-[2rem] space-y-6">
-      <div class="grid grid-cols-2 gap-6">
-        <div class="space-y-2">
-          <label class="text-xs font-bold text-foreground/70 uppercase tracking-wide ml-1">Name</label>
-          <input type="text" placeholder="John Doe" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl outline-none focus:border-primary focus:bg-white/5 transition-all text-white placeholder-white/20">
+
+    <div class="glass-card p-8 rounded-3xl" data-aos="fade-left">
+      <form class="space-y-5">
+        <div class="grid grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-muted uppercase">First Name</label>
+            <input type="text" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="John">
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-muted uppercase">Last Name</label>
+            <input type="text" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="Doe">
+          </div>
         </div>
         <div class="space-y-2">
-          <label class="text-xs font-bold text-foreground/70 uppercase tracking-wide ml-1">Email</label>
-          <input type="email" placeholder="john@company.com" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl outline-none focus:border-primary focus:bg-white/5 transition-all text-white placeholder-white/20">
+          <label class="text-xs font-bold text-muted uppercase">Email Address</label>
+          <input type="email" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="john@company.com">
         </div>
-      </div>
-      <div class="space-y-2">
-        <label class="text-xs font-bold text-foreground/70 uppercase tracking-wide ml-1">Project Details</label>
-        <textarea rows="5" placeholder="Tell me about your vision..." class="w-full bg-black/50 border border-white/10 p-4 rounded-xl outline-none focus:border-primary focus:bg-white/5 transition-all text-white placeholder-white/20 resize-none"></textarea>
-      </div>
-      <button class="w-full py-5 bg-gradient-to-r from-primary to-purple-600 text-white font-black text-lg rounded-xl hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:scale-[1.02] active:scale-95 transition-all">
-        Send Inquiry
-      </button>
-    </form>
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-muted uppercase">Project Details</label>
+          <textarea rows="4" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm resize-none" placeholder="Tell me about your project scope, timeline, and estimated budget..."></textarea>
+        </div>
+        <button type="submit" class="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl active:scale-95 transition-all shadow-[0_0_20px_rgba(139,92,246,0.2)] flex justify-center items-center gap-2">
+          Submit Inquiry <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 
-<footer class="pt-16 pb-28 md:pb-16 border-t border-white/5 bg-black/40 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="text-xl font-black tracking-tighter flex items-center gap-2">
+<footer class="pt-16 pb-8 border-t border-border bg-background">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="text-xl font-extrabold tracking-tighter flex items-center gap-3">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm shadow-[0_0_15px_rgba(139,92,246,0.5)]">P</div>
       <span>PIASH<span class="text-primary">.</span></span>
     </div>
     
-    <div class="flex gap-4">
-      <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-      <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="github" class="w-4 h-4"></i></a>
-      <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-      <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="dribbble" class="w-4 h-4"></i></a>
+    <div class="flex gap-6 text-muted">
+      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="github" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="twitter" class="w-5 h-5"></i></a>
     </div>
-    
-    <div class="text-[12px] font-medium text-foreground/40 uppercase tracking-widest">
-      © 2026 Piash Jodder. All Rights Reserved.
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="text-[11px] text-muted font-medium uppercase tracking-widest">
+      © 2026 Piash Jodder • All Rights Reserved
+    </div>
+    <div class="text-[11px] text-muted font-medium">
+      Engineered with Next-Gen Technologies.
     </div>
   </div>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  // Initialize Icons & Animations
+  // Initialize Lucide Icons
   lucide.createIcons();
-  AOS.init({ once: true, duration: 800, offset: 100 });
-
-  // Page Transition Out
-  window.addEventListener('load', () => {
-    document.getElementById('page-transition').style.opacity = '0';
+  
+  // Initialize AOS Animations
+  AOS.init({ 
+    once: true, 
+    duration: 800,
+    offset: 50,
+    easing: 'ease-out-cubic'
   });
-
-  // Typing Animation Logic
-  const words = ["SaaS Platforms.", "UI/UX Experiences.", "Web Applications.", "Digital Brands."];
-  let i = 0;
-  let timer;
-
-  function typingEffect() {
-    let word = words[i].split("");
-    var loopTyping = function() {
-      if (word.length > 0) {
-        document.getElementById('typewriter').innerHTML += word.shift();
-      } else {
-        setTimeout(deletingEffect, 2000);
-        return false;
-      };
-      timer = setTimeout(loopTyping, 100);
-    };
-    loopTyping();
-  }
-
-  function deletingEffect() {
-    let word = words[i].split("");
-    var loopDeleting = function() {
-      if (word.length > 0) {
-        word.pop();
-        document.getElementById('typewriter').innerHTML = word.join("");
-      } else {
-        if (words.length > (i + 1)) {
-          i++;
-        } else {
-          i = 0;
-        };
-        setTimeout(typingEffect, 500);
-        return false;
-      };
-      timer = setTimeout(loopDeleting, 50);
-    };
-    loopDeleting();
-  }
-  typingEffect();
-
-  // Scroll Progress & Navbar styling
-  window.onscroll = function() {
-    // Scroll progress bar
-    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let scrolled = (winScroll / height) * 100;
-    document.getElementById("scroll-progress").style.width = scrolled + "%";
-
-    // Navbar blur/bg effect
-    const navbar = document.getElementById("navbar");
-    if (winScroll > 50) {
-      navbar.classList.add("bg-background/80");
-    } else {
-      navbar.classList.remove("bg-background/80");
-    }
-  };
-
-  // Skill Bar Intersection Observer
-  const skillBars = document.querySelectorAll('.skill-bar');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        bar.style.width = bar.getAttribute('data-width');
-      }
-    });
-  }, { threshold: 0.5 });
-
-  skillBars.forEach(bar => observer.observe(bar));
 </script>
 
 </body>
