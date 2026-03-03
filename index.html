@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="description" content="Piash Jodder - Full-Stack Developer & SaaS UI Specialist building high-performance digital products." />
-  <meta name="keywords" content="Piash Jodder, Full-Stack Developer, SaaS UI Specialist, React, Next.js, Laravel, Freelancer" />
-  <meta name="author" content="Piash Jodder" />
   
-  <title>Piash Jodder | Premium Full-Stack Developer & SaaS UI Specialist</title>
+  <title>Piash Jodder | Premium Software Architect & UI/UX Designer</title>
+  <meta name="description" content="Portfolio of Piash Jodder, a Premium Full-Stack Developer & UI/UX Designer specializing in SaaS, E-commerce, and high-end web applications." />
+  <meta property="og:title" content="Piash Jodder | Premium Portfolio" />
+  <meta property="og:description" content="I build high-end web applications with clean design and lightning-fast performance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=80" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,36 +20,33 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-          },
           colors: {
-            background: "#05030A",
-            foreground: "#F8F9FA",
-            card: "#0A0713",
-            cardHover: "#110D1D",
-            border: "rgba(255, 255, 255, 0.08)",
-            primary: {
-              DEFAULT: "#8B5CF6",
-              dark: "#7C3AED",
-              light: "#A78BFA"
-            },
-            muted: "#A1A1AA",
+            border: "var(--border)",
+            background: "var(--background)",
+            foreground: "var(--foreground)",
+            primary: "var(--primary)",
+            card: "var(--card)",
+            fiverr: "#1dbf73"
           },
           animation: {
-            'blob': 'blob 7s infinite',
-            'scrolling': 'scroll 20s linear infinite',
+            'gradient-x': 'gradient-x 15s ease infinite',
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
           },
           keyframes: {
-            blob: {
-              '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            'gradient-x': {
+              '0%, 100%': {
+                'background-size': '200% 200%',
+                'background-position': 'left center'
+              },
+              '50%': {
+                'background-size': '200% 200%',
+                'background-position': 'right center'
+              }
             },
-            scroll: {
-              '0%': { transform: 'translateX(0)' },
-              '100%': { transform: 'translateX(-50%)' },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' }
             }
           }
         }
@@ -56,742 +55,1139 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      /* Light Mode Variables */
+      --background: 210 20% 98%;
+      --foreground: 263 40% 2%;
+      --card: 0 0% 100%;
+      --border: 263 20% 85%;
+      --primary: 263 70% 50%;
+    }
+
+    .dark {
+      /* Dark Mode Variables (Default) */
+      --background: 263 40% 2%;
+      --foreground: 210 20% 98%;
+      --card: 263 40% 4%;
+      --border: 263 30% 15%;
+      --primary: 263 70% 50%;
+    }
 
     body {
-      background-color: theme('colors.background');
-      color: theme('colors.foreground');
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .glass {
-      background: rgba(10, 7, 19, 0.6);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid theme('colors.border');
+    /* Page Loader */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: hsl(var(--background));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     
-    .glass-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-      backdrop-filter: blur(20px);
-      border: 1px solid theme('colors.border');
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid hsl(var(--border));
+      border-top-color: hsl(var(--primary));
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(var(--card), 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid hsl(var(--border) / 0.5);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .text-gradient {
-      background: linear-gradient(to right, #ffffff, #A78BFA);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .dark .glass {
+      background: rgba(15, 10, 25, 0.6);
+      border: 1px solid hsl(var(--border));
+    }
+
+    /* Backgrounds & Gradients */
+    .gradient-bg {
+      background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
+      animation: pulse 8s ease-in-out infinite alternate;
     }
 
     .bg-grid-pattern {
-      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-image: linear-gradient(to right, hsl(var(--border)/0.3) 1px, transparent 1px),
+                        linear-gradient(to bottom, hsl(var(--border)/0.3) 1px, transparent 1px);
       background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
     }
 
+    /* Utilities */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .progress-bar {
+      transform-origin: 0% 50%;
+      transition: transform 0.1s ease-out;
+    }
 
-    /* Timeline visual */
-    .timeline-dot::before {
+    .step-dot::after {
       content: '';
       position: absolute;
-      left: -2.35rem;
-      top: 0.5rem;
-      width: 1rem;
-      height: 1rem;
-      background: theme('colors.primary.DEFAULT');
-      border-radius: 50%;
-      border: 3px solid theme('colors.background');
-      box-shadow: 0 0 0 2px theme('colors.primary.DEFAULT');
+      left: 50%;
+      top: 100%;
+      width: 2px;
+      height: 100%;
+      background: hsl(var(--border));
+      transform: translateX(-50%);
     }
-    
-    @media (max-width: 768px) {
-      .timeline-dot::before { left: -1.85rem; }
+    .step-item:last-child .step-dot::after { display: none; }
+
+    .social-card:hover {
+      transform: translateY(-5px);
+      background: linear-gradient(145deg, rgba(124, 58, 237, 0.1), transparent);
+    }
+
+    /* Carousel */
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* Typing effect cursor */
+    .typed-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background-color: hsl(var(--primary));
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 </head>
 
-<body class="selection:bg-primary/30 relative">
+<body class="selection:bg-primary/30 selection:text-white antialiased">
 
-<div class="fixed inset-0 z-[-1] bg-grid-pattern"></div>
-<div class="fixed top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob z-[-1]"></div>
-<div class="fixed top-1/3 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob animation-delay-2000 z-[-1]"></div>
-
-<nav class="fixed top-0 w-full z-50 border-b border-border bg-background/70 backdrop-blur-xl transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    <div class="text-xl font-extrabold tracking-tighter flex items-center gap-3">
-      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm shadow-[0_0_15px_rgba(139,92,246,0.5)]">P</div>
-      <span>PIASH<span class="text-primary">.</span></span>
+  <div id="page-loader">
+    <div class="flex flex-col items-center gap-4">
+      <div class="spinner"></div>
+      <div class="text-sm font-bold tracking-widest uppercase text-primary animate-pulse">Loading Experience</div>
     </div>
-    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
-      <a href="#services" class="hover:text-white transition-colors">Services</a>
-      <a href="#work" class="hover:text-white transition-colors">Work</a>
-      <a href="#process" class="hover:text-white transition-colors">Process</a>
-      <a href="#about" class="hover:text-white transition-colors">About</a>
+  </div>
+
+  <div class="fixed top-0 left-0 w-full h-1 z-[100] bg-border/30">
+    <div id="scroll-progress" class="h-full bg-primary progress-bar w-full scale-x-0"></div>
+  </div>
+
+  <nav class="fixed top-0 w-full z-50 border-b border-border/50 bg-background/70 backdrop-blur-xl transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-5 h-16 md:h-20 flex items-center justify-between">
+      <a href="#" class="text-xl font-extrabold tracking-tighter flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-primary rounded shadow-lg shadow-primary/20 flex items-center justify-center text-white text-sm group-hover:rotate-12 transition-transform duration-300">P</div>
+        <span>PIASH<span class="text-primary">.</span></span>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-foreground/70">
+        <a href="#services" class="hover:text-primary transition-colors">Services</a>
+        <a href="#portfolio" class="hover:text-primary transition-colors">Work</a>
+        <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
+        <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button id="theme-toggle" class="p-2 rounded-full glass hover:text-primary transition-colors" aria-label="Toggle Theme">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+        <a href="#contact" class="hidden md:flex items-center gap-2 text-sm font-bold bg-primary text-white px-5 py-2.5 rounded-full shadow-lg shadow-primary/25 hover:scale-105 transition-transform">
+          Start Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
     </div>
-    <a href="#contact" class="hidden md:flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-2.5 rounded-full hover:scale-105 transition-transform">
-      Start a Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-    </a>
-  </div>
-</nav>
+  </nav>
 
-<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
-  <div class="glass rounded-2xl flex items-center justify-around p-4 shadow-2xl border-white/10">
-    <a href="#services" class="text-muted hover:text-primary transition-colors"><i data-lucide="layers" class="w-6 h-6"></i></a>
-    <a href="#work" class="text-muted hover:text-primary transition-colors"><i data-lucide="layout-grid" class="w-6 h-6"></i></a>
-    <a href="#about" class="text-muted hover:text-primary transition-colors"><i data-lucide="user" class="w-6 h-6"></i></a>
-    <a href="#contact" class="text-muted hover:text-primary transition-colors"><i data-lucide="message-square" class="w-6 h-6"></i></a>
+  <div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
+    <div class="glass rounded-full flex items-center justify-between px-6 py-3 shadow-2xl border-white/5">
+      <a href="#about" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary transition-colors"><i data-lucide="user" class="w-5 h-5"></i></a>
+      <a href="#portfolio" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary transition-colors"><i data-lucide="layout-grid" class="w-5 h-5"></i></a>
+      <a href="#pricing" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary transition-colors"><i data-lucide="tag" class="w-5 h-5"></i></a>
+      <a href="#reviews" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary transition-colors"><i data-lucide="star" class="w-5 h-5"></i></a>
+      <a href="#contact" class="flex flex-col items-center gap-1 text-foreground/50 hover:text-primary transition-colors"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+    </div>
   </div>
-</div>
 
-<section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center">
-  <div class="space-y-8 max-w-4xl mx-auto w-full relative z-10" data-aos="fade-up">
-    
-    <div class="flex flex-wrap justify-center gap-3 mb-6">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold text-primary tracking-wide">
+  <a href="#contact" class="hidden lg:flex fixed bottom-8 right-8 z-40 bg-primary text-white px-6 py-4 rounded-full font-bold shadow-2xl shadow-primary/30 items-center gap-3 hover:scale-105 hover:-translate-y-1 transition-all duration-300 group">
+    <i data-lucide="message-square-dashed" class="w-5 h-5 group-hover:animate-bounce"></i> Let's Talk
+  </a>
+
+  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern opacity-40 -z-20"></div>
+    <div class="absolute inset-0 gradient-bg -z-10"></div>
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[100px] animate-float -z-10"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px] animate-float -z-10" style="animation-delay: 2s;"></div>
+
+    <div class="space-y-8 max-w-4xl mx-auto z-10" data-aos="fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-xs font-bold text-primary tracking-widest uppercase backdrop-blur-sm">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
         </span>
         Available for New Projects
       </div>
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/50 text-xs font-semibold text-muted">
-        <i data-lucide="award" class="w-3.5 h-3.5 text-yellow-500"></i> Top 1% Freelancer
-      </div>
-    </div>
-
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05]">
-      Full-Stack Developer & <br class="hidden md:block"/>
-      <span class="text-gradient">SaaS UI Specialist.</span>
-    </h1>
-    
-    <p class="text-base md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-      I architect and develop high-performance digital products, complex SaaS dashboards, and conversion-optimized web applications that drive real business growth.
-    </p>
-
-    <div class="flex flex-wrap justify-center gap-3 pt-2">
-      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="terminal" class="w-3 h-3"></i> Next.js</span>
-      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="atom" class="w-3 h-3"></i> React</span>
-      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="database" class="w-3 h-3"></i> Laravel</span>
-      <span class="px-3 py-1 rounded-md glass text-xs font-semibold text-foreground/80 flex items-center gap-1"><i data-lucide="wind" class="w-3 h-3"></i> Tailwind CSS</span>
-    </div>
-
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-      <a href="#work" class="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
-        View Selected Work
-      </a>
-      <a href="#contact" class="w-full sm:w-auto px-8 py-4 glass hover:bg-white/5 rounded-xl font-bold transition-all border-white/10 flex items-center justify-center gap-2">
-        Book a Discovery Call <i data-lucide="arrow-up-right" class="w-4 h-4 text-primary"></i>
-      </a>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-16 max-w-3xl mx-auto border-t border-border mt-12">
-      <div class="text-left">
-        <h4 class="text-3xl font-black text-white">5+</h4>
-        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Years Experience</p>
-      </div>
-      <div class="text-left">
-        <h4 class="text-3xl font-black text-white">50+</h4>
-        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Projects Delivered</p>
-      </div>
-      <div class="text-left">
-        <h4 class="text-3xl font-black text-white">100%</h4>
-        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Client Satisfaction</p>
-      </div>
-      <div class="text-left">
-        <h4 class="text-3xl font-black text-white">&lt;0.5s</h4>
-        <p class="text-xs text-muted font-medium uppercase tracking-wider mt-1">Avg Load Time</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-10 border-y border-border/50 bg-card/30 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
-    <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-6">Trusted by innovative companies worldwide</p>
-    <div class="relative w-full flex overflow-hidden mask-image-gradient">
-      <div class="flex w-[200%] animate-scrolling gap-12 md:gap-24 items-center">
-        <div class="flex gap-12 md:gap-24 items-center justify-around w-1/2 opacity-40 grayscale">
-          <h3 class="text-xl font-bold font-serif">ACME Corp</h3>
-          <h3 class="text-xl font-black tracking-tighter">GLOBAL<span class="text-primary">TECH</span></h3>
-          <h3 class="text-xl font-semibold italic">Nexus Innovations</h3>
-          <h3 class="text-xl font-black uppercase tracking-widest">Quantum</h3>
-          <h3 class="text-xl font-bold">Stellar.io</h3>
-        </div>
-        <div class="flex gap-12 md:gap-24 items-center justify-around w-1/2 opacity-40 grayscale">
-          <h3 class="text-xl font-bold font-serif">ACME Corp</h3>
-          <h3 class="text-xl font-black tracking-tighter">GLOBAL<span class="text-primary">TECH</span></h3>
-          <h3 class="text-xl font-semibold italic">Nexus Innovations</h3>
-          <h3 class="text-xl font-black uppercase tracking-widest">Quantum</h3>
-          <h3 class="text-xl font-bold">Stellar.io</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="services" class="py-32 px-6 max-w-7xl mx-auto">
-  <div class="mb-20 md:flex justify-between items-end" data-aos="fade-up">
-    <div class="max-w-2xl">
-      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
-        <span class="w-8 h-px bg-primary"></span> Core Competencies
-      </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Engineering Solutions That <span class="text-primary">Scale.</span></h2>
-    </div>
-    <p class="text-muted mt-6 md:mt-0 max-w-sm md:text-right">Moving beyond generic templates to build custom, high-end architectures tailored for your business metrics.</p>
-  </div>
-
-  <div class="grid lg:grid-cols-3 gap-6">
-    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up">
-      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
-      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-        <i data-lucide="layers" class="w-6 h-6"></i>
-      </div>
-      <h3 class="text-2xl font-bold mb-4">High-Performance SaaS Platforms</h3>
-      <p class="text-muted leading-relaxed mb-8">End-to-end development of robust SaaS applications with complex dashboards, multi-tenant architectures, and API integrations.</p>
-      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Scalable Backend Architecture</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Secure User Authentication</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Payment Gateway Setup</li>
-      </ul>
-      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
-        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-    </div>
-
-    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
-      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-        <i data-lucide="mouse-pointer-click" class="w-6 h-6"></i>
-      </div>
-      <h3 class="text-2xl font-bold mb-4">Conversion-Focused UI/UX</h3>
-      <p class="text-muted leading-relaxed mb-8">Designing pixel-perfect, accessible, and intuitive interfaces utilizing modern design systems like shadcn/ui to maximize user retention.</p>
-      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Premium Dark/Light Modes</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Micro-interactions & Animations</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Responsive Mobile-First Design</li>
-      </ul>
-      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
-        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-    </div>
-
-    <div class="glass-card p-10 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-      <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
-      <div class="w-14 h-14 bg-card border border-border rounded-xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-      </div>
-      <h3 class="text-2xl font-bold mb-4">Scalable E-Commerce Systems</h3>
-      <p class="text-muted leading-relaxed mb-8">Building lightning-fast, high-converting digital storefronts tailored to handle high traffic and complex product inventories.</p>
-      <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Custom Headless Commerce</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Inventory Management APIs</li>
-        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0"></i> Optimized Checkout Flows</li>
-      </ul>
-      <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
-        Discuss Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-6 bg-card/40 border-y border-border">
-  <div class="max-w-7xl mx-auto" data-aos="fade-up">
-    <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
-      <span class="w-8 h-px bg-primary"></span> Featured Case Study
-    </span>
-    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-12">Evalura - Assessment SaaS</h2>
-    
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div class="relative rounded-3xl overflow-hidden border border-border group">
-        <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1470&auto=format&fit=crop" alt="SaaS Dashboard Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-      </div>
       
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Project Overview</h3>
-          <p class="text-muted leading-relaxed">A comprehensive, dynamic web application designed for generating and managing complex MCQ assessment papers. Built with a premium, modern admin panel aesthetic to serve educational institutions.</p>
-        </div>
-        
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="glass p-5 rounded-2xl border-l-2 border-l-primary">
-            <h4 class="font-bold text-white mb-2">The Challenge</h4>
-            <p class="text-sm text-muted">Client needed a secure, lightning-fast platform capable of handling vast question banks with PDF export capabilities, while maintaining a clean, premium UX.</p>
-          </div>
-          <div class="glass p-5 rounded-2xl border-l-2 border-l-primary">
-            <h4 class="font-bold text-white mb-2">The Solution</h4>
-            <p class="text-sm text-muted">Architected a Next.js frontend with Tailwind CSS (shadcn/ui style) connected to a robust Laravel backend, implementing custom PDF generation logic.</p>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider">Tech Stack Used</h4>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Next.js</span>
-            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">React</span>
-            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Tailwind CSS</span>
-            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">Laravel PHP</span>
-            <span class="px-3 py-1 bg-card border border-border rounded-lg text-xs font-medium">MySQL</span>
-          </div>
-        </div>
-        
-        <div class="pt-4 flex gap-4">
-          <button class="px-6 py-3 bg-white text-black rounded-xl font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
-            Live Preview <i data-lucide="external-link" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="work" class="py-32 px-6 max-w-7xl mx-auto">
-  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-up">
-    <div>
-      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
-        <span class="w-8 h-px bg-primary"></span> Selected Portfolio
-      </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Recent <span class="text-primary">Masterpieces.</span></h2>
-    </div>
-    
-    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-      <button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-bold whitespace-nowrap">All Work</button>
-      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">SaaS Dashboards</button>
-      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">E-Commerce</button>
-      <button class="px-5 py-2 rounded-full glass hover:bg-white/5 text-muted text-sm font-bold transition-colors whitespace-nowrap">Web Apps</button>
-    </div>
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-8">
-    <div class="group cursor-pointer" data-aos="fade-up">
-      <div class="overflow-hidden rounded-3xl border border-border bg-card aspect-[4/3] relative mb-6">
-        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1474&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" alt="Map App">
-        <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-          <button class="px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            View Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-      <div class="flex justify-between items-start">
-        <div>
-          <h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">GeoLet Property Map</h3>
-          <p class="text-muted text-sm">Interactive map-based real estate platform with complex filtering and routing.</p>
-        </div>
-        <div class="text-right">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">Web App</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
-      <div class="overflow-hidden rounded-3xl border border-border bg-card aspect-[4/3] relative mb-6">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" alt="Fintech">
-        <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-          <button class="px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            View Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-      <div class="flex justify-between items-start">
-        <div>
-          <h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">FinDash Analytics</h3>
-          <p class="text-muted text-sm">High-end financial dashboard with real-time data visualization and secure auth.</p>
-        </div>
-        <div class="text-right">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">SaaS Dashboard</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="process" class="py-24 px-6 bg-card/20 border-t border-border">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Methodology</span>
-      <h2 class="text-4xl font-extrabold">A Proven Framework for <span class="text-primary">Success</span></h2>
-    </div>
-    
-    <div class="relative pl-8 md:pl-0">
-      <div class="absolute left-8 md:left-[50%] top-0 bottom-0 w-px bg-border md:-translate-x-1/2"></div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
+        Building <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Premium SaaS</span> <br/>
+        <span class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground/80 mt-2 block">
+          I am a <span id="typed-text" class="text-foreground"></span><span class="typed-cursor"></span>
+        </span>
+      </h1>
       
-      <div class="space-y-16">
-        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
-          <div class="md:w-[45%] md:text-right pr-8 order-2 md:order-1 mt-4 md:mt-0">
-            <h3 class="text-2xl font-bold mb-3">1. Strategic Discovery</h3>
-            <p class="text-muted text-sm leading-relaxed">We define your business goals, target audience, and technical requirements to create a robust product roadmap without guesswork.</p>
-          </div>
-          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
-          <div class="md:w-[45%] pl-8 order-1 md:order-2 opacity-50 text-6xl font-black text-transparent stroke-text" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">01</div>
-        </div>
-
-        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
-          <div class="md:w-[45%] pr-8 order-2 md:order-1 mt-4 md:mt-0 md:text-right md:hidden">
-            <h3 class="text-2xl font-bold mb-3">2. UI/UX Architecture</h3>
-            <p class="text-muted text-sm leading-relaxed">Crafting wireframes and high-fidelity prototypes using Figma, ensuring a premium, frictionless user experience before writing any code.</p>
-          </div>
-          <div class="md:w-[45%] md:text-right pr-8 order-1 md:order-1 hidden md:block opacity-50 text-6xl font-black text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">02</div>
-          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
-          <div class="md:w-[45%] pl-8 order-2 md:order-2 mt-4 md:mt-0 hidden md:block">
-            <h3 class="text-2xl font-bold mb-3">2. UI/UX Architecture</h3>
-            <p class="text-muted text-sm leading-relaxed">Crafting wireframes and high-fidelity prototypes using Figma, ensuring a premium, frictionless user experience before writing any code.</p>
-          </div>
-        </div>
-
-        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
-          <div class="md:w-[45%] md:text-right pr-8 order-2 md:order-1 mt-4 md:mt-0">
-            <h3 class="text-2xl font-bold mb-3">3. Agile Development</h3>
-            <p class="text-muted text-sm leading-relaxed">Building secure, scalable code architectures using modern stacks (Next.js, Laravel). Continuous deployment allows you to track progress in real-time.</p>
-          </div>
-          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
-          <div class="md:w-[45%] pl-8 order-1 md:order-2 opacity-50 text-6xl font-black text-transparent stroke-text" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">03</div>
-        </div>
-
-        <div class="relative flex flex-col md:flex-row items-start md:justify-between group" data-aos="fade-up">
-          <div class="md:w-[45%] pr-8 order-2 md:order-1 mt-4 md:mt-0 md:text-right md:hidden">
-            <h3 class="text-2xl font-bold mb-3">4. Launch & Scale</h3>
-            <p class="text-muted text-sm leading-relaxed">Rigorous QA testing, performance optimization, and secure deployment to production servers, followed by ongoing technical support.</p>
-          </div>
-          <div class="md:w-[45%] md:text-right pr-8 order-1 md:order-1 hidden md:block opacity-50 text-6xl font-black text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.1);">04</div>
-          <div class="absolute left-0 md:left-[50%] top-0 timeline-dot md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
-          <div class="md:w-[45%] pl-8 order-2 md:order-2 mt-4 md:mt-0 hidden md:block">
-            <h3 class="text-2xl font-bold mb-3">4. Launch & Scale</h3>
-            <p class="text-muted text-sm leading-relaxed">Rigorous QA testing, performance optimization, and secure deployment to production servers, followed by ongoing technical support.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="py-32 px-6 max-w-7xl mx-auto border-t border-border">
-  <div class="grid lg:grid-cols-2 gap-16 items-center">
-    
-    <div data-aos="fade-right">
-      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2 mb-4">
-        <span class="w-8 h-px bg-primary"></span> The Developer
-      </span>
-      <h2 class="text-4xl font-extrabold mb-6">I Build Digital Assets, <br/><span class="text-muted">Not Just Websites.</span></h2>
+      <p class="text-base md:text-xl text-foreground/60 max-w-2xl mx-auto font-medium leading-relaxed">
+        I architect and design high-end web applications with clean, scalable code and lightning-fast performance for modern businesses.
+      </p>
       
-      <div class="space-y-4 text-muted leading-relaxed">
-        <p>I am Piash Jodder, a specialized Full-Stack Developer driven by a singular philosophy: <strong>Code should solve business problems.</strong></p>
-        <p>Over the past 5+ years, I've transitioned from building basic websites to architecting complex, data-driven SaaS platforms and scalable e-commerce systems for clients who demand excellence.</p>
-        <p>My unique edge lies in marrying robust backend logic (PHP/Laravel/MySQL) with premium, conversion-optimized frontend interfaces (Next.js/React/Tailwind). I don't just write code; I partner with you to engineer a product that elevates your brand and outpaces the competition.</p>
-      </div>
-
-      <div class="flex gap-4 mt-8">
-        <div class="glass px-4 py-3 rounded-xl border-l-2 border-l-primary flex-1">
-          <p class="text-xs text-muted uppercase tracking-wider mb-1">Code Quality</p>
-          <p class="font-bold">Enterprise Grade</p>
-        </div>
-        <div class="glass px-4 py-3 rounded-xl border-l-2 border-l-primary flex-1">
-          <p class="text-xs text-muted uppercase tracking-wider mb-1">Communication</p>
-          <p class="font-bold">Transparent & Direct</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="space-y-6" data-aos="fade-left">
-      <div class="glass-card p-6 rounded-3xl">
-        <h4 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="layout-template" class="w-4 h-4 text-primary"></i> Frontend Engineering</h4>
-        <div class="space-y-3">
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1"><span>React / Next.js</span><span class="text-primary">95%</span></div>
-            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[95%]"></div></div>
-          </div>
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1"><span>Tailwind CSS / UI Libraries</span><span class="text-primary">98%</span></div>
-            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[98%]"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card p-6 rounded-3xl">
-        <h4 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="server" class="w-4 h-4 text-primary"></i> Backend & Database</h4>
-        <div class="space-y-3">
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1"><span>PHP / Laravel</span><span class="text-primary">90%</span></div>
-            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[90%]"></div></div>
-          </div>
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1"><span>MySQL / API Design</span><span class="text-primary">92%</span></div>
-            <div class="w-full h-1.5 bg-background rounded-full overflow-hidden"><div class="h-full bg-primary w-[92%]"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex gap-4">
-        <div class="glass-card p-5 rounded-2xl flex-1 flex flex-col justify-center items-center text-center">
-          <i data-lucide="figma" class="w-6 h-6 text-primary mb-2"></i>
-          <span class="text-sm font-bold">UI/UX Design</span>
-        </div>
-        <div class="glass-card p-5 rounded-2xl flex-1 flex flex-col justify-center items-center text-center">
-          <i data-lucide="git-branch" class="w-6 h-6 text-primary mb-2"></i>
-          <span class="text-sm font-bold">Git & DevOps</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="pricing" class="py-24 px-6 bg-card/20 border-y border-border">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Investment</span>
-      <h2 class="text-4xl md:text-5xl font-extrabold">Transparent <span class="text-primary">Pricing.</span></h2>
-      <p class="text-muted mt-4 max-w-md mx-auto">High-ROI digital solutions structured for serious businesses.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-3 gap-8 items-center">
-      
-      <div class="glass-card p-8 rounded-[2rem]" data-aos="fade-up">
-        <h3 class="text-xl font-bold mb-1">Standard Presence</h3>
-        <p class="text-sm text-muted mb-6">Best for personal brands & portfolios</p>
-        <div class="text-4xl font-black mb-6">$995<span class="text-sm text-muted font-normal">/project</span></div>
-        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
-          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 2-3 Weeks Delivery</div>
-          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> 2 Revisions</div>
-          <div class="w-full h-px bg-border my-4"></div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Custom Premium Design</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Fully Responsive (Mobile First)</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Basic SEO Setup</div>
-        </div>
-        <a href="#contact" class="block w-full py-4 text-center glass rounded-xl font-bold hover:bg-white/5 transition-colors">Start Project</a>
-      </div>
-
-      <div class="glass-card p-10 rounded-[2.5rem] border-primary/50 relative shadow-[0_0_40px_rgba(139,92,246,0.15)] transform lg:-translate-y-4 bg-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Most Popular</div>
-        <h3 class="text-2xl font-bold mb-1">Dynamic Business</h3>
-        <p class="text-sm text-primary mb-6">Best for corporate & growing startups</p>
-        <div class="text-5xl font-black mb-6">$2,495<span class="text-sm text-muted font-normal">/project</span></div>
-        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
-          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 4-6 Weeks Delivery</div>
-          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Unlimited Revisions (Design phase)</div>
-          <div class="w-full h-px bg-border my-4"></div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Next.js / Laravel Architecture</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Custom Admin Panel / CMS</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Advanced Animations & Interactions</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Advanced Technical SEO</div>
-        </div>
-        <a href="#contact" class="block w-full py-4 text-center bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-colors shadow-lg shadow-primary/25">Select Plan</a>
-      </div>
-
-      <div class="glass-card p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="200">
-        <h3 class="text-xl font-bold mb-1">Enterprise SaaS</h3>
-        <p class="text-sm text-muted mb-6">Best for complex web applications</p>
-        <div class="text-4xl font-black mb-6">Custom</div>
-        <div class="space-y-4 mb-8 text-sm text-foreground/80 font-medium">
-          <div class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> Timeline: TBD</div>
-          <div class="flex items-center gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Continuous Support</div>
-          <div class="w-full h-px bg-border my-4"></div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Scalable Multi-tenant Architecture</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Complex API Integrations</div>
-          <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Payment Gateway Infrastructure</div>
-        </div>
-        <a href="#contact" class="block w-full py-4 text-center glass rounded-xl font-bold hover:bg-white/5 transition-colors">Request Quote</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
-  <div class="text-center mb-16" data-aos="fade-up">
-    <h2 class="text-3xl font-bold">Client <span class="text-primary">Endorsements</span></h2>
-  </div>
-  
-  <div class="flex gap-6 overflow-x-auto no-scrollbar pb-8 snap-x snap-mandatory">
-    <div class="min-w-[350px] md:min-w-[450px] snap-center glass-card p-8 rounded-3xl relative">
-      <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-border opacity-50"></i>
-      <div class="flex text-yellow-500 gap-1 mb-6">
-        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-      </div>
-      <p class="text-muted leading-relaxed mb-8">"Piash didn't just write code; he architected a solution that completely transformed our assessment platform. The UI is incredibly slick, and the backend handles thousands of requests flawlessly. A true top-tier professional."</p>
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 bg-card rounded-full overflow-hidden border border-border">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover">
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">Marcus V.</h4>
-          <p class="text-xs text-primary font-semibold">SaaS Founder, United Kingdom</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="min-w-[350px] md:min-w-[450px] snap-center glass-card p-8 rounded-3xl relative">
-      <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-border opacity-50"></i>
-      <div class="flex text-yellow-500 gap-1 mb-6">
-        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-      </div>
-      <p class="text-muted leading-relaxed mb-8">"We hired Piash for a complex map-based real estate portal. His expertise in Next.js and API integration saved us months of development time. The final product looks like a $50k agency build."</p>
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 bg-card rounded-full overflow-hidden border border-border">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover">
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">Sarah Jenkins</h4>
-          <p class="text-xs text-primary font-semibold">PropTech Director, USA</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-24 px-6 relative overflow-hidden">
-  <div class="absolute inset-0 bg-primary/5"></div>
-  <div class="max-w-4xl mx-auto relative z-10 text-center glass-card p-12 md:p-20 rounded-[3rem] border-primary/20 shadow-[0_0_50px_rgba(139,92,246,0.1)]" data-aos="zoom-in">
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Ready to Build Your Next <br/>High-Performance Product?</h2>
-    <p class="text-muted mb-10 max-w-xl mx-auto">Stop settling for mediocre templates. Let's engineer a custom solution that elevates your brand and drives measurable results.</p>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#contact" class="px-8 py-4 bg-white text-black hover:bg-gray-200 rounded-xl font-bold transition-colors flex items-center justify-center gap-2">
-        Book a Discovery Call <i data-lucide="calendar" class="w-4 h-4"></i>
-      </a>
-      <a href="mailto:contact@piashjodder.com" class="px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-colors shadow-lg shadow-primary/25">
-        Email Directly
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="py-24 px-6 max-w-3xl mx-auto">
-  <div class="text-center mb-16" data-aos="fade-up">
-    <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
-  </div>
-  
-  <div class="space-y-4">
-    <details class="glass-card rounded-2xl group transition-all duration-300">
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
-        What is your typical process for a new project?
-        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
-        My process is highly structured: Discovery Call -> Strategy & Proposal -> UI/UX Design (Figma) -> Client Approval -> Agile Development (Next.js/Laravel) -> QA Testing -> Launch & Support. I ensure complete transparency at every stage.
-      </div>
-    </details>
-
-    <details class="glass-card rounded-2xl group transition-all duration-300">
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
-        Do you only do frontend or full-stack?
-        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
-        I am a dedicated Full-Stack Developer. I handle everything from database architecture (MySQL, PostgreSQL) and server logic (PHP/Laravel) to premium frontend interfaces (React/Next.js). I build complete, production-ready systems.
-      </div>
-    </details>
-
-    <details class="glass-card rounded-2xl group transition-all duration-300">
-      <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-base md:text-lg select-none">
-        How do you handle revisions?
-        <span class="transition-transform duration-300 group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
-      </summary>
-      <div class="px-6 pb-6 text-muted border-t border-border/50 pt-4 leading-relaxed">
-        During the UI/UX design phase, I offer extensive revisions to ensure the visual direction is perfect. Once the design is approved and development begins, technical revisions are scoped according to the project contract to ensure timely delivery.
-      </div>
-    </details>
-  </div>
-</section>
-
-<section id="contact" class="py-24 px-6 border-t border-border bg-card/30">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
-    
-    <div data-aos="fade-right">
-      <h2 class="text-4xl font-extrabold mb-6">Let's Discuss Your <span class="text-primary">Vision.</span></h2>
-      <p class="text-muted mb-10 leading-relaxed">Fill out the form to outline your project requirements, or reach out directly via email or WhatsApp. I usually respond within 24 hours.</p>
-      
-      <div class="space-y-6">
-        <a href="mailto:hello@piashjodder.com" class="flex items-center gap-4 glass p-4 rounded-2xl hover:border-primary/50 transition-colors group">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-            <i data-lucide="mail" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <p class="text-xs text-muted uppercase tracking-wider font-bold">Email Me</p>
-            <p class="font-medium text-white">hello@piashjodder.com</p>
-          </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/25 hover:-translate-y-1 hover:shadow-primary/40 transition-all duration-300 flex items-center justify-center gap-2">
+          View Selected Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
-        
-        <a href="#" class="flex items-center gap-4 glass p-4 rounded-2xl hover:border-green-500/50 transition-colors group">
-          <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-white transition-colors">
-            <i data-lucide="phone" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <p class="text-xs text-muted uppercase tracking-wider font-bold">WhatsApp</p>
-            <p class="font-medium text-white">+880 1XXX XXXXXX</p>
-          </div>
+        <a href="#contact" class="w-full sm:w-auto px-8 py-4 glass rounded-xl font-bold hover:bg-foreground/5 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i> Book a Call
         </a>
       </div>
     </div>
+  </section>
 
-    <div class="glass-card p-8 rounded-3xl" data-aos="fade-left">
-      <form class="space-y-5">
-        <div class="grid grid-cols-2 gap-5">
-          <div class="space-y-2">
-            <label class="text-xs font-bold text-muted uppercase">First Name</label>
-            <input type="text" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="John">
-          </div>
-          <div class="space-y-2">
-            <label class="text-xs font-bold text-muted uppercase">Last Name</label>
-            <input type="text" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="Doe">
-          </div>
-        </div>
-        <div class="space-y-2">
-          <label class="text-xs font-bold text-muted uppercase">Email Address</label>
-          <input type="email" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm" placeholder="john@company.com">
-        </div>
-        <div class="space-y-2">
-          <label class="text-xs font-bold text-muted uppercase">Project Details</label>
-          <textarea rows="4" class="w-full bg-background/50 border border-border p-4 rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm resize-none" placeholder="Tell me about your project scope, timeline, and estimated budget..."></textarea>
-        </div>
-        <button type="submit" class="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl active:scale-95 transition-all shadow-[0_0_20px_rgba(139,92,246,0.2)] flex justify-center items-center gap-2">
-          Submit Inquiry <i data-lucide="send" class="w-4 h-4"></i>
-        </button>
-      </form>
+  <section class="py-10 border-y border-border/50 bg-card/30 backdrop-blur-sm relative z-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-xs font-bold text-foreground/40 uppercase tracking-[0.2em] mb-6">Trusted by innovative companies & founders</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+        <div class="flex items-center gap-2 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer text-foreground font-bold text-xl"><i data-lucide="hexagon" class="text-blue-500 fill-blue-500/20"></i> NexaCorp</div>
+        <div class="flex items-center gap-2 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer text-foreground font-bold text-xl"><i data-lucide="triangle" class="text-emerald-500 fill-emerald-500/20"></i> VertexUI</div>
+        <div class="flex items-center gap-2 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer text-foreground font-bold text-xl"><i data-lucide="circle-dot" class="text-primary fill-primary/20"></i> SphereSaaS</div>
+        <div class="flex items-center gap-2 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer text-foreground font-bold text-xl"><i data-lucide="boxes" class="text-orange-500 fill-orange-500/20"></i> BlockStack</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="pt-16 pb-8 border-t border-border bg-background">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-    <div class="text-xl font-extrabold tracking-tighter flex items-center gap-3">
-      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm shadow-[0_0_15px_rgba(139,92,246,0.5)]">P</div>
-      <span>PIASH<span class="text-primary">.</span></span>
+  <section id="services" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="mb-20 text-center" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Offerings</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">What I <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Deliver</span></h2>
+      <p class="text-base text-foreground/60 mt-4 max-w-xl mx-auto leading-relaxed">Providing high-quality digital solutions tailored to your business needs, focusing on scale and design perfection.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="glass p-10 rounded-[2.5rem] group hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 relative overflow-hidden" data-aos="fade-up">
+        <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 group-hover:scale-150 transition-all duration-700">
+          <i data-lucide="code-2" class="w-32 h-32"></i>
+        </div>
+        <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+          <i data-lucide="code-2" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+        <p class="text-sm text-foreground/60 leading-relaxed mb-8">Building fast, scalable, and secure web applications using React, Next.js, and modern backend technologies.</p>
+        <ul class="space-y-3 text-sm text-foreground/70 font-semibold mb-8">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Custom Web Apps</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> API Integration</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> CMS Development</li>
+        </ul>
+        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:text-foreground transition-colors">
+          Discuss Project <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] group hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 group-hover:scale-150 transition-all duration-700">
+          <i data-lucide="layout" class="w-32 h-32"></i>
+        </div>
+        <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+          <i data-lucide="layout" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+        <p class="text-sm text-foreground/60 leading-relaxed mb-8">Creating visually stunning and user-centric designs that ensure a seamless experience across all devices.</p>
+        <ul class="space-y-3 text-sm text-foreground/70 font-semibold mb-8">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Figma Prototyping</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Design Systems</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Responsive Layouts</li>
+        </ul>
+        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:text-foreground transition-colors">
+          View Process <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] group hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+        <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 group-hover:scale-150 transition-all duration-700">
+          <i data-lucide="shopping-cart" class="w-32 h-32"></i>
+        </div>
+        <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+          <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">E-commerce Solutions</h3>
+        <p class="text-sm text-foreground/60 leading-relaxed mb-8">Developing high-converting online stores with secure payment gateways and comprehensive admin dashboards.</p>
+        <ul class="space-y-3 text-sm text-foreground/70 font-semibold mb-8">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Stripe Integration</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Inventory Management</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> Conversion Optimization</li>
+        </ul>
+        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:text-foreground transition-colors">
+          Start Selling <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="relative group" data-aos="fade-right">
+        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-blue-600 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+        <div class="aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-border bg-card relative z-10">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt="Piash Jodder Profile">
+          <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-2xl backdrop-blur-md">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-bold text-foreground">Piash Jodder</p>
+                <p class="text-xs text-foreground/60">Lead Architect</p>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                <i data-lucide="code" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-8" data-aos="fade-left">
+        <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">About Me</span>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">Designing with <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Purpose</span></h2>
+        <p class="text-base md:text-lg text-foreground/70 leading-relaxed">
+          I am a Full-Stack Developer & UI/UX Designer obsessed with creating digital experiences that leave a lasting impression. With a keen eye for modern aesthetics like Shadcn/UI and glassmorphism, I bridge the gap between design and complex backend logic.
+        </p>
+        <p class="text-base text-foreground/60 leading-relaxed">
+          My approach is rooted in problem-solving. I don't just write code; I architect scalable solutions tailored to elevate your brand and optimize your business workflows.
+        </p>
+        
+        <div class="grid grid-cols-2 gap-6 pt-4">
+          <div class="glass p-6 rounded-2xl border-l-4 border-l-primary">
+            <div class="text-4xl font-black text-foreground">50<span class="text-primary">+</span></div>
+            <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold mt-2">Projects Completed</p>
+          </div>
+          <div class="glass p-6 rounded-2xl border-l-4 border-l-blue-500">
+            <div class="text-4xl font-black text-foreground">5<span class="text-blue-500">yr</span></div>
+            <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold mt-2">Industry Experience</p>
+          </div>
+        </div>
+        
+        <div class="pt-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png" class="h-8 opacity-40 hover:opacity-100 transition-opacity invert dark:invert-0" alt="Github Signature">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="mb-20 text-center" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Expertise</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Technical <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Arsenal</span></h2>
+      <p class="text-base text-foreground/60 mt-4 max-w-xl mx-auto">Premium tech stacks selected for performance, scalability, and modern development standards.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="glass p-10 rounded-[2.5rem] space-y-8 hover:border-primary/40 transition-colors" data-aos="fade-up">
+        <div class="flex items-center gap-5 mb-2">
+          <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary shadow-inner">
+            <i data-lucide="monitor-smartphone" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold">Frontend</h3>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">React / Next.js</span><span class="text-primary">95%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[95%] relative"><div class="absolute inset-0 bg-white/20 animate-pulse"></div></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">Tailwind CSS</span><span class="text-primary">98%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[98%] relative"></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">TypeScript</span><span class="text-primary">85%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[85%] relative"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] space-y-8 hover:border-primary/40 transition-colors" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex items-center gap-5 mb-2">
+          <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary shadow-inner">
+            <i data-lucide="database" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold">Backend</h3>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">Node.js / Express</span><span class="text-primary">90%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[90%] relative"></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">PHP / Laravel</span><span class="text-primary">80%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[80%] relative"></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">PostgreSQL / MongoDB</span><span class="text-primary">88%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[88%] relative"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] space-y-8 hover:border-primary/40 transition-colors" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex items-center gap-5 mb-2">
+          <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center text-primary shadow-inner">
+            <i data-lucide="figma" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold">Design & Ops</h3>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">Figma / UI Design</span><span class="text-primary">92%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[92%] relative"></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">Git / Vercel</span><span class="text-primary">95%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[95%] relative"></div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm font-bold"><span class="text-foreground">Docker / AWS Basic</span><span class="text-primary">70%</span></div>
+            <div class="w-full h-2 bg-border/50 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full w-[70%] relative"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="py-32 px-6 bg-card/20 relative">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6" data-aos="fade-up">
+        <div>
+          <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Selected Work</span>
+          <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Featured <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Projects</span></h2>
+        </div>
+        
+        <div class="flex flex-wrap gap-2" id="portfolio-filters">
+          <button class="filter-btn active px-5 py-2 rounded-full text-sm font-bold bg-primary text-white transition-all" data-filter="all">All</button>
+          <button class="filter-btn px-5 py-2 rounded-full text-sm font-bold glass hover:bg-primary/20 transition-all" data-filter="saas">SaaS</button>
+          <button class="filter-btn px-5 py-2 rounded-full text-sm font-bold glass hover:bg-primary/20 transition-all" data-filter="ecommerce">E-commerce</button>
+          <button class="filter-btn px-5 py-2 rounded-full text-sm font-bold glass hover:bg-primary/20 transition-all" data-filter="dashboard">Dashboard</button>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        <div class="portfolio-item saas dashboard glass rounded-[2rem] overflow-hidden group" data-aos="fade-up">
+          <div class="aspect-[4/3] bg-muted overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Fintech App">
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+              <div class="flex gap-3 w-full">
+                <a href="#" class="flex-1 bg-white text-black py-2 rounded-xl text-center text-sm font-bold hover:bg-gray-200 transition">Live Demo</a>
+                <a href="#case-study" class="flex-1 glass text-white py-2 rounded-xl text-center text-sm font-bold hover:bg-white/10 transition">Case Study</a>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex gap-2 mb-4">
+              <span class="text-[10px] font-bold px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20">Next.js</span>
+              <span class="text-[10px] font-bold px-2 py-1 bg-blue-500/10 text-blue-500 rounded border border-blue-500/20">Tailwind</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Fintech Analytics SaaS</h3>
+            <p class="text-sm text-foreground/60">A comprehensive financial dashboard with real-time data visualization and secure role-based access.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item ecommerce glass rounded-[2rem] overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+          <div class="aspect-[4/3] bg-muted overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="E-Commerce">
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+              <div class="flex gap-3 w-full">
+                <a href="#" class="flex-1 bg-white text-black py-2 rounded-xl text-center text-sm font-bold hover:bg-gray-200 transition">Live Demo</a>
+                <a href="#" class="flex-1 glass text-white py-2 rounded-xl text-center text-sm font-bold hover:bg-white/10 transition">GitHub</a>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex gap-2 mb-4">
+              <span class="text-[10px] font-bold px-2 py-1 bg-orange-500/10 text-orange-500 rounded border border-orange-500/20">React</span>
+              <span class="text-[10px] font-bold px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded border border-emerald-500/20">Stripe</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Aura E-Commerce Store</h3>
+            <p class="text-sm text-foreground/60">Modern headless e-commerce storefront with a custom cart, checkout flow, and Sanity CMS.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item saas glass rounded-[2rem] overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+          <div class="aspect-[4/3] bg-muted overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="AI Tool">
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+              <div class="flex gap-3 w-full">
+                <a href="#" class="flex-1 bg-white text-black py-2 rounded-xl text-center text-sm font-bold hover:bg-gray-200 transition">Live Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex gap-2 mb-4">
+              <span class="text-[10px] font-bold px-2 py-1 bg-purple-500/10 text-purple-500 rounded border border-purple-500/20">Vue.js</span>
+              <span class="text-[10px] font-bold px-2 py-1 bg-gray-500/10 text-gray-400 rounded border border-gray-500/20">OpenAI API</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">AI Content Generator</h3>
+            <p class="text-sm text-foreground/60">SaaS platform for marketers leveraging AI to generate blog posts, social media copy, and SEO meta tags.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="case-study" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="glass rounded-[3rem] p-8 md:p-16 border-primary/20 relative overflow-hidden">
+      <div class="absolute -right-32 -top-32 w-96 h-96 bg-primary/20 blur-[100px] rounded-full"></div>
+      
+      <div class="grid lg:grid-cols-2 gap-16 relative z-10">
+        <div class="space-y-8" data-aos="fade-right">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold text-primary tracking-widest uppercase">
+            Featured Case Study
+          </div>
+          <h2 class="text-3xl md:text-5xl font-black leading-tight">Scaling to 100k+ Users with <span class="text-primary">Next.js</span></h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-lg font-bold text-foreground mb-2 flex items-center gap-2"><i data-lucide="target" class="w-5 h-5 text-red-500"></i> The Problem</h4>
+              <p class="text-sm text-foreground/60 leading-relaxed">The client's legacy CRM was crashing under data load, causing 5-second page loads and a 40% bounce rate among enterprise users.</p>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-foreground mb-2 flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5 text-yellow-500"></i> The Solution</h4>
+              <p class="text-sm text-foreground/60 leading-relaxed">Architected a headless Next.js frontend with SSR, decoupled from a microservices backend, using Redis caching and Postgres indexing.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center space-y-6" data-aos="fade-left">
+          <div class="grid grid-cols-2 gap-6">
+            <div class="glass p-6 rounded-3xl border-border/50 hover:border-primary transition-colors">
+              <div class="text-4xl font-black text-emerald-500 mb-1">-85%</div>
+              <p class="text-xs font-bold text-foreground/50 uppercase tracking-widest">Load Time</p>
+            </div>
+            <div class="glass p-6 rounded-3xl border-border/50 hover:border-primary transition-colors">
+              <div class="text-4xl font-black text-blue-500 mb-1">+120%</div>
+              <p class="text-xs font-bold text-foreground/50 uppercase tracking-widest">User Retention</p>
+            </div>
+            <div class="glass p-6 rounded-3xl border-border/50 hover:border-primary transition-colors">
+              <div class="text-4xl font-black text-purple-500 mb-1">99.9%</div>
+              <p class="text-xs font-bold text-foreground/50 uppercase tracking-widest">Uptime</p>
+            </div>
+            <div class="glass p-6 rounded-3xl border-border/50 hover:border-primary transition-colors flex items-center justify-center group cursor-pointer">
+              <span class="font-bold text-sm group-hover:text-primary transition-colors flex items-center gap-2">Read Full <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-32 px-6 max-w-5xl mx-auto overflow-hidden">
+    <div class="mb-20 text-center" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Timeline</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Professional <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Journey</span></h2>
     </div>
     
-    <div class="flex gap-6 text-muted">
-      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="github" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors p-2 glass rounded-full"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-    </div>
-  </div>
-  
-  <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
-    <div class="text-[11px] text-muted font-medium uppercase tracking-widest">
-      © 2026 Piash Jodder • All Rights Reserved
-    </div>
-    <div class="text-[11px] text-muted font-medium">
-      Engineered with Next-Gen Technologies.
-    </div>
-  </div>
-</footer>
+    <div class="relative">
+      <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-blue-500 to-transparent rounded-full opacity-30"></div>
+      
+      <div class="space-y-12">
+        <div class="relative flex flex-col md:flex-row items-center group" data-aos="fade-up">
+          <div class="ml-12 md:ml-0 md:w-1/2 md:pr-16 md:text-right order-2 md:order-1 w-full">
+            <div class="glass p-8 rounded-3xl transition-all duration-500 hover:border-primary hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/20">
+              <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-black rounded-full mb-3">2024 - Present</span>
+              <h3 class="text-2xl font-bold mt-1">Senior Full-Stack Freelancer</h3>
+              <p class="text-sm text-foreground/50 font-bold mb-4">Independent Contractor</p>
+              <p class="text-sm text-foreground/70 leading-relaxed">Architecting high-end SaaS dashboards, e-commerce platforms, and premium portfolio experiences for global clients. Specializing in Next.js and Tailwind ecosystem.</p>
+            </div>
+          </div>
+          <div class="absolute left-2 md:left-1/2 transform md:-translate-x-1/2 w-5 h-5 rounded-full bg-primary border-[4px] border-background z-10 shadow-[0_0_15px_rgba(124,58,237,0.5)] group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="md:w-1/2 order-1 md:order-2"></div>
+        </div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  // Initialize Lucide Icons
-  lucide.createIcons();
-  
-  // Initialize AOS Animations
-  AOS.init({ 
-    once: true, 
-    duration: 800,
-    offset: 50,
-    easing: 'ease-out-cubic'
-  });
-</script>
+        <div class="relative flex flex-col md:flex-row items-center group" data-aos="fade-up">
+          <div class="md:w-1/2 order-1 md:order-1"></div>
+          <div class="absolute left-2 md:left-1/2 transform md:-translate-x-1/2 w-5 h-5 rounded-full bg-blue-500 border-[4px] border-background z-10 shadow-[0_0_15px_rgba(59,130,246,0.5)] group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="ml-12 md:ml-0 md:w-1/2 md:pl-16 order-2 md:order-2 w-full">
+            <div class="glass p-8 rounded-3xl transition-all duration-500 hover:border-blue-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/20">
+              <span class="inline-block px-3 py-1 bg-blue-500/10 text-blue-500 text-xs font-black rounded-full mb-3">2021 - 2023</span>
+              <h3 class="text-2xl font-bold mt-1">Frontend Engineer</h3>
+              <p class="text-sm text-foreground/50 font-bold mb-4">TechNova Solutions</p>
+              <p class="text-sm text-foreground/70 leading-relaxed">Led the frontend development team in rebuilding a legacy monolithic application into a modern React SPA, improving performance scores by 40%.</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="relative flex flex-col md:flex-row items-center group" data-aos="fade-up">
+          <div class="ml-12 md:ml-0 md:w-1/2 md:pr-16 md:text-right order-2 md:order-1 w-full">
+            <div class="glass p-8 rounded-3xl transition-all duration-500 hover:border-foreground/40 hover:-translate-y-1">
+              <span class="inline-block px-3 py-1 bg-foreground/10 text-foreground text-xs font-black rounded-full mb-3">2019 - 2021</span>
+              <h3 class="text-2xl font-bold mt-1">Junior Web Developer</h3>
+              <p class="text-sm text-foreground/50 font-bold mb-4">Creative Studio Digital</p>
+              <p class="text-sm text-foreground/70 leading-relaxed">Developed responsive WordPress themes, integrated custom PHP plugins, and collaborated closely with the UI design team to implement pixel-perfect layouts.</p>
+            </div>
+          </div>
+          <div class="absolute left-2 md:left-1/2 transform md:-translate-x-1/2 w-5 h-5 rounded-full bg-foreground border-[4px] border-background z-10 group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="md:w-1/2 order-1 md:order-2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="py-32 px-6 bg-card/40 border-y border-border/50">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-20 text-center" data-aos="fade-up">
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">The Development <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Process</span></h2>
+        <p class="text-base text-foreground/60 mt-4">A streamlined approach from conceptualization to deployment.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+        <div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-border z-0"></div>
+
+        <div class="step-item relative z-10 flex flex-col items-center text-center space-y-6" data-aos="fade-up">
+          <div class="w-24 h-24 rounded-full glass flex items-center justify-center text-3xl font-black text-primary shadow-xl shadow-primary/20 bg-background">01</div>
+          <div>
+            <h3 class="font-bold text-2xl mb-3">Discovery & Strategy</h3>
+            <p class="text-sm text-foreground/60 leading-relaxed">Deep dive into your requirements, target audience, and business goals to plan the perfect technical roadmap.</p>
+          </div>
+        </div>
+
+        <div class="step-item relative z-10 flex flex-col items-center text-center space-y-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-24 h-24 rounded-full glass flex items-center justify-center text-3xl font-black text-blue-500 shadow-xl shadow-blue-500/20 bg-background">02</div>
+          <div>
+            <h3 class="font-bold text-2xl mb-3">Design & Development</h3>
+            <p class="text-sm text-foreground/60 leading-relaxed">Creating high-fidelity Figma prototypes and writing clean, scalable code following modern architectural patterns.</p>
+          </div>
+        </div>
+
+        <div class="step-item relative z-10 flex flex-col items-center text-center space-y-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-24 h-24 rounded-full glass flex items-center justify-center text-3xl font-black text-emerald-500 shadow-xl shadow-emerald-500/20 bg-background">03</div>
+          <div>
+            <h3 class="font-bold text-2xl mb-3">Testing & Launch</h3>
+            <p class="text-sm text-foreground/60 leading-relaxed">Rigorous QA testing, performance optimization, SEO setup, and secure deployment to production servers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="mb-20 text-center" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Investment</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Transparent <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Pricing</span></h2>
+      <p class="text-base text-foreground/60 mt-4 max-w-md mx-auto">Choose a plan that fits your project scope and business scale.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 items-center">
+      <div class="glass p-10 rounded-[2.5rem] flex flex-col group hover:border-primary/50 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold mb-2">Essential</h3>
+          <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold">Landing Pages</p>
+        </div>
+        <div class="mb-8 flex items-baseline gap-2">
+          <span class="text-5xl font-black text-foreground">$199</span>
+          <span class="text-foreground/40 text-sm font-bold">/start</span>
+        </div>
+        <ul class="space-y-4 mb-10 flex-grow text-sm text-foreground/70 font-medium">
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> 1-3 Pages Responsive</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Modern Tailwind UI</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Basic Contact Form</li>
+          <li class="flex items-center gap-3 text-foreground/30"><i data-lucide="x" class="w-5 h-5"></i> CMS Integration</li>
+        </ul>
+        <a href="#contact" class="w-full py-4 text-center glass border border-border/50 rounded-2xl font-bold group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all active:scale-95">Get Started</a>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] flex flex-col border-primary bg-gradient-to-b from-primary/10 to-transparent relative scale-100 md:scale-105 shadow-2xl shadow-primary/20 z-10" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-500 text-white text-[10px] font-black px-6 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Most Popular</div>
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold mb-2 text-primary">Professional</h3>
+          <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold">Dynamic Websites</p>
+        </div>
+        <div class="mb-8 flex items-baseline gap-2">
+          <span class="text-5xl font-black text-foreground">$499</span>
+          <span class="text-foreground/40 text-sm font-bold">/avg</span>
+        </div>
+        <ul class="space-y-4 mb-10 flex-grow text-sm text-foreground/70 font-medium">
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Up to 10 Pages</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Headless CMS Setup</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Advanced Animations</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> SEO Optimization</li>
+        </ul>
+        <a href="#contact" class="w-full py-4 text-center bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 active:scale-95 transition-all">Select Plan</a>
+      </div>
+
+      <div class="glass p-10 rounded-[2.5rem] flex flex-col group hover:border-primary/50 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+          <p class="text-xs text-foreground/50 uppercase tracking-widest font-bold">Web Apps & SaaS</p>
+        </div>
+        <div class="mb-8 flex items-baseline gap-2">
+          <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-300 dark:to-white italic">Custom</span>
+        </div>
+        <ul class="space-y-4 mb-10 flex-grow text-sm text-foreground/70 font-medium">
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Full-Stack Application</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Complex API Integrations</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Custom Dashboard/Admin</li>
+          <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Ongoing Support</li>
+        </ul>
+        <a href="#contact" class="w-full py-4 text-center glass border border-border/50 rounded-2xl font-bold group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all active:scale-95">Let's Discuss</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="fiverr" class="py-20 px-6">
+    <div class="max-w-5xl mx-auto bg-[#1dbf73]/10 border border-[#1dbf73]/30 rounded-[3rem] p-10 md:p-16 text-center space-y-8 overflow-hidden relative" data-aos="zoom-in">
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#1dbf73]/5 to-transparent animate-gradient-x pointer-events-none"></div>
+      <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-[#1dbf73]/30">
+        <svg viewBox="0 0 24 24" class="w-10 h-10 fill-[#1dbf73]"><path d="M7.1 12H5.4v6.93h1.7V12zm4.6 0H10v6.93h1.7V12zm9.6 0h-1.7v6.93h1.7V12zm-4.8 0h-1.7v6.93h1.7V12zM5.4 8.6h1.7v1.7H5.4V8.6zm4.6 0h1.7v1.7H10V8.6zm9.6 0h-1.7v1.7h1.7V8.6zm-4.8 0h-1.7v1.7h1.7V8.6z"/></svg>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black text-[#1dbf73]">Hire Me on Fiverr</h2>
+      <p class="text-base md:text-lg text-foreground/80 max-w-xl mx-auto font-medium">Get fixed pricing, clear deliverables, and robust buyer protection by hiring me through the world's leading freelance marketplace.</p>
+      <a href="#" class="inline-block px-10 py-5 bg-[#1dbf73] text-white rounded-2xl font-bold text-lg shadow-xl shadow-[#1dbf73]/40 hover:-translate-y-1 hover:shadow-2xl transition-all active:scale-95 relative z-10">Visit My Pro Profile</a>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-32 px-0 bg-card/20 border-y border-border/50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 mb-16 text-center" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Testimonials</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Client <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Love</span></h2>
+    </div>
+
+    <div class="w-full relative cursor-grab active:cursor-grabbing pb-10" id="carousel-container">
+      <div class="carousel-track gap-6 px-6 md:px-12" id="carousel-track">
+        <div class="min-w-[320px] md:min-w-[400px] glass p-8 rounded-[2rem] select-none">
+          <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+          <p class="text-sm md:text-base italic text-foreground/80 mb-8 leading-relaxed">"Fast delivery and amazing UI. Piash transformed our vague concept into a polished, high-converting SaaS product. Best developer I've worked with."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">A</div>
+            <div>
+              <p class="text-sm font-bold text-foreground">Alex Johnson</p>
+              <p class="text-xs text-foreground/50">CEO, TechNova</p>
+            </div>
+          </div>
+        </div>
+        <div class="min-w-[320px] md:min-w-[400px] glass p-8 rounded-[2rem] select-none">
+          <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+          <p class="text-sm md:text-base italic text-foreground/80 mb-8 leading-relaxed">"His attention to detail in UI design and clean code structure is unmatched. The project was delivered ahead of schedule with zero bugs."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center font-bold text-blue-500">S</div>
+            <div>
+              <p class="text-sm font-bold text-foreground">Sarah Williams</p>
+              <p class="text-xs text-foreground/50">Founder, E-Shopify</p>
+            </div>
+          </div>
+        </div>
+        <div class="min-w-[320px] md:min-w-[400px] glass p-8 rounded-[2rem] select-none">
+          <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+          <p class="text-sm md:text-base italic text-foreground/80 mb-8 leading-relaxed">"Piash is a true professional. The dashboard he built for us handles complex data beautifully. Highly recommended for any serious web application."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center font-bold text-emerald-500">M</div>
+            <div>
+              <p class="text-sm font-bold text-foreground">Michael Chen</p>
+              <p class="text-xs text-foreground/50">CTO, DataFlow</p>
+            </div>
+          </div>
+        </div>
+        <div class="min-w-[320px] md:min-w-[400px] glass p-8 rounded-[2rem] select-none">
+          <div class="flex text-yellow-500 gap-1 mb-6"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+          <p class="text-sm md:text-base italic text-foreground/80 mb-8 leading-relaxed">"Fast delivery and amazing UI. Piash transformed our vague concept into a polished, high-converting SaaS product. Best developer I've worked with."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">A</div>
+            <div>
+              <p class="text-sm font-bold text-foreground">Alex Johnson</p>
+              <p class="text-xs text-foreground/50">CEO, TechNova</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-up">
+      <div>
+        <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Insights</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 tracking-tight">Latest <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Articles</span></h2>
+      </div>
+      <a href="#" class="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">View All Posts <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <a href="#" class="glass rounded-[2rem] overflow-hidden group hover:-translate-y-2 transition-transform duration-500 block" data-aos="fade-up">
+        <div class="aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="React Patterns">
+        </div>
+        <div class="p-8">
+          <p class="text-xs text-primary font-bold mb-3">Development • Oct 12, 2025</p>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Advanced Next.js App Router Patterns</h3>
+          <p class="text-sm text-foreground/60 line-clamp-2">Exploring server actions, parallel routes, and interception in the latest Next.js 14 paradigm for enterprise apps.</p>
+        </div>
+      </a>
+      
+      <a href="#" class="glass rounded-[2rem] overflow-hidden group hover:-translate-y-2 transition-transform duration-500 block" data-aos="fade-up" data-aos-delay="100">
+        <div class="aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="UI Design">
+        </div>
+        <div class="p-8">
+          <p class="text-xs text-blue-500 font-bold mb-3">Design • Sep 28, 2025</p>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-blue-500 transition-colors">The Future of Glassmorphism in UI</h3>
+          <p class="text-sm text-foreground/60 line-clamp-2">How background blur, subtle borders, and contextual lighting are evolving in modern web design trends.</p>
+        </div>
+      </a>
+
+      <a href="#" class="glass rounded-[2rem] overflow-hidden group hover:-translate-y-2 transition-transform duration-500 block" data-aos="fade-up" data-aos-delay="200">
+        <div class="aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Tech Business">
+        </div>
+        <div class="p-8">
+          <p class="text-xs text-emerald-500 font-bold mb-3">Business • Aug 15, 2025</p>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-500 transition-colors">Why Your SaaS Needs a Headless Architecture</h3>
+          <p class="text-sm text-foreground/60 line-clamp-2">Decoupling your frontend from your backend for infinite scalability, security, and omnichannel delivery.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="faq" class="py-32 px-6 max-w-3xl mx-auto border-t border-border/50">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">FAQ</span>
+      <h2 class="text-4xl font-black mt-6">Common <span class="text-primary">Questions</span></h2>
+    </div>
+    
+    <div class="space-y-4">
+      <details class="glass rounded-2xl group transition-all duration-300" open>
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
+          What is your typical project timeline?
+          <span class="transition-transform duration-300 group-open:rotate-180 bg-primary/10 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+        </summary>
+        <div class="px-6 pb-6 text-sm md:text-base text-foreground/70 border-t border-border/50 pt-4 leading-relaxed">
+          For a standard professional website, it takes about 2-3 weeks. Complex SaaS applications or e-commerce platforms can take 1-2 months depending on the feature scope and API integrations.
+        </div>
+      </details>
+      
+      <details class="glass rounded-2xl group transition-all duration-300">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
+          Do you provide post-launch support?
+          <span class="transition-transform duration-300 group-open:rotate-180 bg-primary/10 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+        </summary>
+        <div class="px-6 pb-6 text-sm md:text-base text-foreground/70 border-t border-border/50 pt-4 leading-relaxed">
+          Yes! I offer 30 days of free bug fixing and support post-launch. For ongoing maintenance, feature additions, or retainers, we can discuss a custom enterprise support contract.
+        </div>
+      </details>
+
+      <details class="glass rounded-2xl group transition-all duration-300">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg select-none">
+          What technologies do you prefer to use?
+          <span class="transition-transform duration-300 group-open:rotate-180 bg-primary/10 p-2 rounded-full"><i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i></span>
+        </summary>
+        <div class="px-6 pb-6 text-sm md:text-base text-foreground/70 border-t border-border/50 pt-4 leading-relaxed">
+          My core premium stack consists of Next.js (React), Tailwind CSS, TypeScript, and Node.js/Laravel for the backend. I use Vercel for deployment, ensuring maximum performance and edge caching.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="contact" class="py-32 px-6 border-t border-border/50 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 -z-10"></div>
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16">
+      
+      <div class="space-y-8" data-aos="fade-right">
+        <div>
+          <span class="text-primary font-black text-xs uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Contact</span>
+          <h2 class="text-4xl md:text-6xl font-black mt-6 tracking-tight">Let's Build <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Together.</span></h2>
+          <p class="text-base text-foreground/60 mt-4 leading-relaxed">Have a project in mind? Fill out the form or reach out directly via WhatsApp to discuss your technical needs.</p>
+        </div>
+
+        <div class="space-y-4">
+          <a href="#" class="glass p-6 rounded-2xl flex items-center gap-4 hover:border-primary transition-colors group">
+            <div class="w-12 h-12 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all">
+              <i data-lucide="message-circle" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Chat on WhatsApp</p>
+              <p class="text-xs text-foreground/50">Fastest response time</p>
+            </div>
+          </a>
+          
+          <a href="#" class="glass p-6 rounded-2xl flex items-center gap-4 hover:border-blue-500 transition-colors group">
+            <div class="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all">
+              <i data-lucide="calendar" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Schedule via Calendly</p>
+              <p class="text-xs text-foreground/50">Book a 30-min discovery call</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="glass p-8 md:p-10 rounded-[2.5rem] relative" data-aos="fade-left">
+        <div id="success-alert" class="absolute inset-0 bg-card/95 backdrop-blur-xl rounded-[2.5rem] flex flex-col items-center justify-center z-20 opacity-0 pointer-events-none transition-opacity duration-500">
+          <div class="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 animate-bounce">
+            <i data-lucide="check-circle-2" class="w-10 h-10 text-emerald-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-2">Message Sent!</h3>
+          <p class="text-sm text-foreground/60 text-center px-6">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+          <button type="button" onclick="resetForm()" class="mt-8 px-6 py-2 border border-border rounded-full text-sm font-bold hover:bg-foreground/5 transition-colors">Send Another</button>
+        </div>
+
+        <form id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-foreground/70 uppercase tracking-wider pl-1">Name</label>
+              <input type="text" id="form-name" required placeholder="John Doe" class="w-full bg-background/50 border border-border p-4 rounded-2xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm font-medium">
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-foreground/70 uppercase tracking-wider pl-1">Email</label>
+              <input type="email" id="form-email" required placeholder="john@company.com" class="w-full bg-background/50 border border-border p-4 rounded-2xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm font-medium">
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-foreground/70 uppercase tracking-wider pl-1">Project Details</label>
+            <textarea rows="5" id="form-message" required placeholder="Tell me about your project scope, budget, and timeline..." class="w-full bg-background/50 border border-border p-4 rounded-2xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none text-sm font-medium"></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="w-full py-4 bg-primary text-white font-bold rounded-2xl active:scale-95 transition-transform shadow-xl shadow-primary/30 flex justify-center items-center gap-2 group">
+            <span>Send Message</span>
+            <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="pt-20 pb-10 border-t border-border bg-card/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
+        <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
+          <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white text-sm">P</div>
+          <span>PIASH<span class="text-primary">.</span></span>
+        </div>
+        
+        <div class="flex gap-4">
+          <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:-translate-y-1"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:-translate-y-1"><i data-lucide="github" class="w-5 h-5"></i></a>
+          <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all hover:-translate-y-1"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+          <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all hover:-translate-y-1"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border/50 text-xs font-bold text-foreground/40 uppercase tracking-widest gap-4">
+        <p>© 2026 Piash Jodder. All Rights Reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-primary transition-colors">Privacy</a>
+          <a href="#" class="hover:text-primary transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="h-16 md:hidden"></div> </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Initialize AOS Animation
+    AOS.init({ once: true, duration: 800, offset: 50 });
+
+    // Page Loader
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('page-loader');
+      setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.visibility = 'hidden';
+          loader.style.display = 'none';
+        }, 500);
+      }, 500); // Small artificial delay for premium feel
+    });
+
+    // Dark/Light Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    
+    themeToggle.addEventListener('click', () => {
+      htmlElement.classList.toggle('dark');
+      // Update icons inside toggle
+      const isDark = htmlElement.classList.contains('dark');
+      themeToggle.innerHTML = isDark 
+        ? '<i data-lucide="sun" class="w-4 h-4"></i>' 
+        : '<i data-lucide="moon" class="w-4 h-4"></i>';
+      lucide.createIcons();
+    });
+
+    // Scroll Progress Bar
+    const scrollProgress = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollProgress.style.transform = `scaleX(${scrolled / 100})`;
+    });
+
+    // Navbar Blur Effect on Scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-xl', 'shadow-background/20');
+      } else {
+        navbar.classList.remove('shadow-xl', 'shadow-background/20');
+      }
+    });
+
+    // Typing Effect
+    const typedTextElement = document.getElementById('typed-text');
+    const words = ["Software Architect.", "UI/UX Designer.", "Full-Stack Dev.", "Problem Solver."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        typedTextElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedTextElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000; // Pause at end of word
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500; // Pause before typing next
+      }
+      setTimeout(typeEffect, typeSpeed);
+    }
+    setTimeout(typeEffect, 1500); // Start typing after loader
+
+    // Portfolio Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Active class toggle
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-primary', 'text-white');
+          b.classList.add('glass');
+        });
+        btn.classList.remove('glass');
+        btn.classList.add('bg-primary', 'text-white');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        portfolioItems.forEach(item => {
+          if (filterValue === 'all' || item.classList.contains(filterValue)) {
+            item.style.display = 'block';
+            setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+          } else {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => { item.style.display = 'none'; }, 300);
+          }
+        });
+      });
+    });
+
+    // Auto Sliding Carousel (Vanilla JS)
+    const track = document.getElementById('carousel-track');
+    let scrollAmount = 0;
+    const scrollStep = 1;
+    let scrollInterval;
+
+    function startScroll() {
+      scrollInterval = setInterval(() => {
+        track.style.transform = `translateX(-${scrollAmount}px)`;
+        scrollAmount += scrollStep;
+        
+        // Reset when reaching roughly the end (cloned item makes it look seamless)
+        // Hardcoded arbitrary limit based on card widths, can be dynamic
+        if (scrollAmount > 1200) { 
+          scrollAmount = 0;
+        }
+      }, 20); // Smooth 60fps-ish
+    }
+
+    function stopScroll() {
+      clearInterval(scrollInterval);
+    }
+
+    // Start auto-scroll
+    startScroll();
+
+    // Pause on hover
+    track.addEventListener('mouseenter', stopScroll);
+    track.addEventListener('mouseleave', startScroll);
+
+    // Mobile Swipe (Touch events)
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => {
+      stopScroll();
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    track.addEventListener('touchend', e => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) { scrollAmount += 300; } // Swipe left
+      if (touchEndX > touchStartX + 50) { scrollAmount = Math.max(0, scrollAmount - 300); } // Swipe right
+      track.style.transform = `translateX(-${scrollAmount}px)`;
+      startScroll();
+    }, {passive: true});
+
+    // Contact Form Handling (Simulation)
+    const contactForm = document.getElementById('contact-form');
+    const successAlert = document.getElementById('success-alert');
+    const submitBtn = document.getElementById('submit-btn');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Animate button
+      const btnSpan = submitBtn.querySelector('span');
+      const originalText = btnSpan.textContent;
+      btnSpan.textContent = 'Sending...';
+      submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+      
+      // Simulate API call
+      setTimeout(() => {
+        successAlert.classList.remove('opacity-0', 'pointer-events-none');
+        contactForm.reset();
+        btnSpan.textContent = originalText;
+        submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }, 1500);
+    });
+
+    function resetForm() {
+      successAlert.classList.add('opacity-0', 'pointer-events-none');
+    }
+  </script>
 </body>
 </html>
